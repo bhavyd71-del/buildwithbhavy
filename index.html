@@ -337,7 +337,7 @@
 </head>
 <body class="bg-brand-void text-brand-offwhite antialiased selection:bg-brand-gold selection:text-brand-void">
 
-  <!-- 1. INTERACTIVE DOT MATRIX CANVAS (Replaces flat 2D grid with responsive mouse-reactive dots) -->
+  <!-- 1. INTERACTIVE DOT MATRIX CANVAS -->
   <canvas id="dotMatrixCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
   <!-- 2. PERSISTENT HERO 3D LAYER CONTAINER -->
@@ -1538,9 +1538,9 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <!-- Email -->
+                  <!-- Email Address -->
                   <div>
-                    <label for="workEmail" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">Corporate Email *</label>
+                    <label for="workEmail" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">Email Address *</label>
                     <input type="email" id="workEmail" required placeholder="alexander@company.com" class="w-full px-4 py-3 rounded bg-brand-void/90 border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors">
                   </div>
 
@@ -1588,7 +1588,7 @@
                 <!-- Feedback Toast -->
                 <div id="formSuccess" class="hidden p-4 rounded bg-emerald-950/60 border border-emerald-500/50 text-emerald-200 text-xs font-mono">
                   <i class="fa-solid fa-check-circle mr-2 text-emerald-400"></i>
-                  System inquiry transmitted successfully to BuildWithBhavyee. We will review your brief and contact your designated WhatsApp (+91 7623954045 or submitted phone) shortly.
+                  System inquiry transmitted successfully. WhatsApp is opening to deliver your specifications directly to +91 7623954045.
                 </div>
 
               </form>
@@ -1688,7 +1688,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-[11px] font-mono uppercase text-brand-muted mb-1">Email *</label>
+            <label class="block text-[11px] font-mono uppercase text-brand-muted mb-1">Email Address *</label>
             <input type="email" id="mEmail" required placeholder="alexander@vance.com" class="w-full px-3.5 py-2.5 rounded bg-brand-void/90 border border-brand-border focus:border-brand-gold focus:outline-none text-xs text-white">
           </div>
           <div>
@@ -1733,7 +1733,7 @@
         </div>
 
         <div id="mSuccessAlert" class="hidden p-3 rounded bg-emerald-950/60 border border-emerald-500/50 text-emerald-300 text-xs font-mono">
-          ✓ Received by BuildWithBhavyee. Our lead developer will connect with you via WhatsApp / Email shortly.
+          ✓ Received by BuildWithBhavyee. Opening WhatsApp to connect directly with our lead developer.
         </div>
       </form>
     </div>
@@ -1775,11 +1775,11 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- JAVASCRIPT: DOT MATRIX CANVAS, WEB AUDIO UI, THREE.JS 3D, DYNAMIC SCROLL -->
+  <!-- JAVASCRIPT: WEB AUDIO UI, THREE.JS, DIRECT WHATSAPP SUBMISSION ENGINE -->
   <!-- ========================================================================= -->
   <script>
     // --------------------------------------------------------------------------
-    // A. SUBTLE AUDIO UI (Synthesized Web Audio API - Zero External Dependencies)
+    // A. SUBTLE AUDIO UI (Synthesized Web Audio API)
     // --------------------------------------------------------------------------
     let audioEnabled = true;
     let audioCtx = null;
@@ -1797,7 +1797,6 @@
       return audioCtx;
     }
 
-    // High-tech luxury UI sounds
     const soundUI = {
       hover: function() {
         if (!audioEnabled) return;
@@ -1894,7 +1893,6 @@
       }
     }
 
-    // Attach sound feedback to primary interactive elements
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('button, a, .flip-card, .system-node-card').forEach(el => {
         el.addEventListener('mouseenter', () => soundUI.hover(), { passive: true });
@@ -1909,7 +1907,7 @@
     });
 
     // --------------------------------------------------------------------------
-    // B. INTERACTIVE DOT MATRIX CANVAS (High-Tech Responsive Particle Grid)
+    // B. INTERACTIVE DOT MATRIX CANVAS (Responsive Particle Grid)
     // --------------------------------------------------------------------------
     (function initDotMatrix() {
       const canvas = document.getElementById('dotMatrixCanvas');
@@ -1918,7 +1916,7 @@
       let width = canvas.width = window.innerWidth;
       let height = canvas.height = window.innerHeight;
 
-      const spacing = 38; // Clean spacing between matrix points
+      const spacing = 38;
       let mouseX = -1000;
       let mouseY = -1000;
       let targetMouseX = -1000;
@@ -1937,11 +1935,10 @@
       function renderMatrix() {
         ctx.clearRect(0, 0, width, height);
 
-        // Smooth mouse dampening
         mouseX += (targetMouseX - mouseX) * 0.12;
         mouseY += (targetMouseY - mouseY) * 0.12;
 
-        const maxDist = 140; // Proximity radius for gold illumination
+        const maxDist = 140;
         const baseRadius = 0.85;
 
         for (let x = spacing / 2; x < width; x += spacing) {
@@ -1955,11 +1952,9 @@
               const radius = baseRadius + (ratio * 1.8);
               ctx.beginPath();
               ctx.arc(x, y, radius, 0, Math.PI * 2);
-              // Illuminates to metallic gold near cursor
               ctx.fillStyle = `rgba(212, 175, 55, ${0.12 + ratio * 0.65})`;
               ctx.fill();
             } else {
-              // Minimal subtle base dots
               ctx.beginPath();
               ctx.arc(x, y, baseRadius, 0, Math.PI * 2);
               ctx.fillStyle = 'rgba(255, 255, 255, 0.055)';
@@ -1973,7 +1968,7 @@
     })();
 
     // --------------------------------------------------------------------------
-    // C. THREE.JS INTERACTIVE 3D DIGITAL SYSTEM CANVAS (Persistent Engine)
+    // C. THREE.JS INTERACTIVE 3D CANVAS (Persistent Engine)
     // --------------------------------------------------------------------------
     (function initHero3D() {
       const canvas = document.getElementById('hero-3d-canvas');
@@ -1988,16 +1983,15 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // 3D Nodes and Network Pipeline
       const nodeCount = window.innerWidth < 768 ? 36 : 72;
       const nodesGeometry = new THREE.BufferGeometry();
       const positions = new Float32Array(nodeCount * 3);
       const velocities = [];
 
       for (let i = 0; i < nodeCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 140;     // X
-        positions[i + 1] = (Math.random() - 0.5) * 90;  // Y
-        positions[i + 2] = (Math.random() - 0.5) * 70;  // Z
+        positions[i] = (Math.random() - 0.5) * 140;
+        positions[i + 1] = (Math.random() - 0.5) * 90;
+        positions[i + 2] = (Math.random() - 0.5) * 70;
         velocities.push({
           x: (Math.random() - 0.5) * 0.04,
           y: (Math.random() - 0.5) * 0.04,
@@ -2201,7 +2195,7 @@
     })();
 
     // --------------------------------------------------------------------------
-    // F. INQUIRY MODAL POPUP LOGIC
+    // F. INQUIRY MODAL POPUP LOGIC + DIRECT WHATSAPP SUBMISSION
     // --------------------------------------------------------------------------
     const inquiryModal = document.getElementById('inquiryModal');
     const modalContent = document.getElementById('inquiryModalContent');
@@ -2235,16 +2229,41 @@
     function handleModalSubmit(e) {
       e.preventDefault();
       soundUI.click();
+
       const submitBtn = document.getElementById('mSubmitBtn');
       const alertBox = document.getElementById('mSuccessAlert');
-      
+
+      const name = document.getElementById('mName').value.trim();
+      const business = document.getElementById('mBusiness').value.trim();
+      const email = document.getElementById('mEmail').value.trim();
+      const phone = document.getElementById('mPhone').value.trim();
+      const scope = document.getElementById('mScope').value;
+      const budget = document.getElementById('mBudget').value;
+      const details = document.getElementById('mDetails').value.trim() || 'No specific details provided';
+
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Syncing With Server...';
+      submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Opening WhatsApp...';
+
+      const whatsappMessage = 
+        `⚡ *QUICK INTAKE SPECIFICATION | BuildWithBhavyee*%0A%0A` +
+        `👤 *Client Name:* ${encodeURIComponent(name)}%0A` +
+        `🏢 *Business:* ${encodeURIComponent(business)}%0A` +
+        `📧 *Email Address:* ${encodeURIComponent(email)}%0A` +
+        `📞 *WhatsApp/Phone:* ${encodeURIComponent(phone)}%0A` +
+        `🎯 *Requirement:* ${encodeURIComponent(scope)}%0A` +
+        `💰 *Budget:* ${encodeURIComponent(budget)}%0A` +
+        `📝 *Brief:* ${encodeURIComponent(details)}%0A%0A` +
+        `_Transmitted via BuildWithBhavyee Web Modal_`;
+
+      const whatsappURL = `https://wa.me/917623954045?text=${whatsappMessage}`;
 
       setTimeout(() => {
         soundUI.success();
+        window.open(whatsappURL, '_blank');
+
         submitBtn.classList.add('hidden');
         alertBox.classList.remove('hidden');
+
         setTimeout(() => {
           closeInquiryModal();
           submitBtn.disabled = false;
@@ -2252,8 +2271,8 @@
           submitBtn.classList.remove('hidden');
           alertBox.classList.add('hidden');
           document.getElementById('modalInquiryForm').reset();
-        }, 3200);
-      }, 950);
+        }, 2500);
+      }, 800);
     }
 
     // --------------------------------------------------------------------------
@@ -2293,23 +2312,54 @@
     }, 4500);
 
     // --------------------------------------------------------------------------
-    // I. CONTACT SECTION FORM HANDLER
+    // I. CONTACT SECTION FORM HANDLER -> DIRECT WHATSAPP SUBMISSION
     // --------------------------------------------------------------------------
     function handleFormSubmit(e) {
       if (e) e.preventDefault();
       soundUI.click();
+
       const btn = document.getElementById('submitBtn');
       const successBox = document.getElementById('formSuccess');
-      
+
+      const name = document.getElementById('fullName').value.trim();
+      const business = document.getElementById('businessName').value.trim();
+      const email = document.getElementById('workEmail').value.trim();
+      const phone = document.getElementById('phoneNum').value.trim();
+      const scope = document.getElementById('projectScope').value;
+      const budget = document.getElementById('budgetRange').value;
+      const details = document.getElementById('projectDetails').value.trim() || 'No specific details provided';
+
       btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Transmitting System Brief...';
-      
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Opening WhatsApp...';
+
+      const whatsappMessage = 
+        `🚀 *NEW PROJECT INQUIRY | BuildWithBhavyee*%0A%0A` +
+        `👤 *Client Name:* ${encodeURIComponent(name)}%0A` +
+        `🏢 *Business/Company:* ${encodeURIComponent(business)}%0A` +
+        `📧 *Email Address:* ${encodeURIComponent(email)}%0A` +
+        `📞 *Client Phone:* ${encodeURIComponent(phone)}%0A` +
+        `🎯 *Requirement:* ${encodeURIComponent(scope)}%0A` +
+        `💰 *Budget Allocation:* ${encodeURIComponent(budget)}%0A` +
+        `📝 *Project Brief:* ${encodeURIComponent(details)}%0A%0A` +
+        `_Transmitted via BuildWithBhavyee Web System_`;
+
+      const whatsappURL = `https://wa.me/917623954045?text=${whatsappMessage}`;
+
       setTimeout(() => {
         soundUI.success();
+        window.open(whatsappURL, '_blank');
+
         btn.classList.add('hidden');
         successBox.classList.remove('hidden');
         document.getElementById('contactForm').reset();
-      }, 1000);
+
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerHTML = 'Submit System Specifications';
+          btn.classList.remove('hidden');
+          successBox.classList.add('hidden');
+        }, 5000);
+      }, 800);
     }
 
     // --------------------------------------------------------------------------
