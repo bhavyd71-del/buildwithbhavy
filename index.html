@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA DIGITAL SYSTEMS | High-Converting Websites, AI Systems & Automation</title>
+  <meta name="description" content="We engineer digital systems that drive measurable business growth. High-converting websites, sales funnels, AI workflows, and automated customer journeys.">
+  <meta name="keywords" content="digital systems, sales funnels, AI business automation, conversion rate optimization, enterprise landing pages, WhatsApp automation">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://auradigitalsystems.com/">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://auradigitalsystems.com/">
+  <meta property="og:title" content="AURA DIGITAL SYSTEMS | Growth Systems & AI Automation">
+  <meta property="og:description" content="Engineering unified digital architectures that transform traffic into scalable enterprise revenue.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#080809',
+              void: '#030304',
+              surface: '#0F1012',
+              surfaceLight: '#17181C',
+              border: '#23252A',
+              borderLight: '#32353D',
+              gold: '#D4AF37',
+              goldLight: '#F3E5AB',
+              goldDim: '#8A7322',
+              accent: '#C5A059',
+              muted: '#8E929E',
+              offwhite: '#EDEDF0'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace']
+          },
+          boxShadow: {
+            'gold-glow': '0 0 45px -10px rgba(212, 175, 55, 0.22)',
+            'gold-sm': '0 0 20px -5px rgba(212, 175, 55, 0.3)',
+            'card-depth': '0 20px 40px -15px rgba(0,0,0,0.8), 0 0 1px 1px rgba(255,255,255,0.05)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Premium Base & Reset */
+    * {
+      border-color: #23252A;
+      box-sizing: border-box;
+    }
+    ::selection {
+      background-color: #D4AF37;
+      color: #030304;
+    }
+    body {
+      background-color: #080809;
+      color: #EDEDF0;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      overflow-x: hidden;
+    }
+    
+    /* Fine subtle noise & grid */
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F3E5AB 50%, #C5A059 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-border-gradient {
+      border-image: linear-gradient(to bottom right, rgba(212, 175, 55, 0.45), rgba(255, 255, 255, 0.05)) 1;
+    }
+
+    /* 3D Perspective Container */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .preserve-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+
+    /* Smooth Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #080809;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #23252A;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D4AF37;
+    }
+
+    /* System Flow Connection Pulse */
+    @keyframes pulsePath {
+      0% { stroke-dashoffset: 200; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .animate-pipeline {
+      stroke-dasharray: 8 12;
+      animation: pulsePath 12s linear infinite;
+    }
+
+    /* Glow orb animation */
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.25; }
+      50% { transform: translateY(-30px) scale(1.1); opacity: 0.4; }
+    }
+    .ambient-orb {
+      animation: orbFloat 14s ease-in-out infinite alternate;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .animate-pipeline, .ambient-orb, .scroll-smooth {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://auradigitalsystems.com/#organization",
+        "name": "AURA Digital Systems",
+        "url": "https://auradigitalsystems.com",
+        "logo": "https://auradigitalsystems.com/assets/logo.png",
+        "description": "Enterprise digital systems architecture, AI workflows, and high-conversion infrastructure.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Sales and Project Strategy",
+          "availableLanguage": ["English"]
+        }
+      },
+      {
+        "@type": "Service",
+        "name": "Digital Systems & Conversion Infrastructure",
+        "provider": { "@id": "https://auradigitalsystems.com/#organization" },
+        "serviceType": "Digital Systems Development",
+        "description": "Full-stack conversion systems, business automation, AI workflows, and structured sales funnels."
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="bg-brand-void text-brand-offwhite antialiased selection:bg-brand-gold selection:text-brand-void">
+
+  <!-- Ambient Cinematic Depth Glows -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="ambient-orb absolute top-[-10%] left-[20%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-brand-goldDim/20 to-transparent blur-[140px]"></div>
+    <div class="ambient-orb absolute top-[40%] right-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-yellow-700/10 to-transparent blur-[160px]" style="animation-delay: -5s;"></div>
+    <div class="ambient-orb absolute bottom-[-10%] left-[10%] w-[650px] h-[650px] rounded-full bg-gradient-to-tr from-brand-goldDim/15 to-transparent blur-[180px]" style="animation-delay: -9s;"></div>
+  </div>
+
+  <!-- STICKY NAVIGATION -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl bg-brand-void/80 border-b border-brand-border/60" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+      
+      <!-- Brand Identity -->
+      <a href="#hero" class="flex items-center gap-3.5 group focus:outline-none focus:ring-1 focus:ring-brand-gold" aria-label="AURA Digital Systems Home">
+        <div class="w-10 h-10 rounded-lg bg-brand-surface border border-brand-borderLight flex items-center justify-center relative overflow-hidden group-hover:border-brand-gold/60 transition-colors">
+          <div class="absolute inset-0 bg-gradient-to-tr from-brand-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <svg class="w-5 h-5 text-brand-gold transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-mono text-sm tracking-[0.25em] text-white font-bold uppercase">AURA</span>
+          <span class="text-[10px] tracking-[0.15em] text-brand-muted uppercase font-medium">Digital Systems</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-brand-muted" aria-label="Main Navigation">
+        <a href="#services" class="hover:text-white transition-colors duration-200">Services</a>
+        <a href="#systems" class="hover:text-white transition-colors duration-200">Systems</a>
+        <a href="#work" class="hover:text-white transition-colors duration-200">Work</a>
+        <a href="#process" class="hover:text-white transition-colors duration-200">Process</a>
+        <a href="#about" class="hover:text-white transition-colors duration-200">About</a>
+        <a href="#contact" class="hover:text-white transition-colors duration-200">Contact</a>
+      </nav>
+
+      <!-- Action Button Desktop -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="#contact" class="relative inline-flex items-center justify-center px-6 py-2.5 text-xs font-mono uppercase tracking-wider font-semibold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-sm hover:shadow-gold-glow hover:brightness-110 transition-all duration-300">
+          Start a Project
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button type="button" id="mobileMenuBtn" class="md:hidden p-2 text-brand-muted hover:text-white focus:outline-none focus:ring-1 focus:ring-brand-gold" aria-label="Toggle Mobile Menu" aria-expanded="false">
+        <i class="fa-solid fa-bars-staggered text-xl" id="menuIcon"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden border-b border-brand-border bg-brand-surface/98 px-6 py-8 space-y-5 transition-all">
+      <nav class="flex flex-col space-y-4 text-base font-medium">
+        <a href="#services" class="mobile-nav-link text-brand-muted hover:text-white py-1 transition-colors">Services</a>
+        <a href="#systems" class="mobile-nav-link text-brand-muted hover:text-white py-1 transition-colors">Systems</a>
+        <a href="#work" class="mobile-nav-link text-brand-muted hover:text-white py-1 transition-colors">Work</a>
+        <a href="#process" class="mobile-nav-link text-brand-muted hover:text-white py-1 transition-colors">Process</a>
+        <a href="#about" class="mobile-nav-link text-brand-muted hover:text-white py-1 transition-colors">About</a>
+        <a href="#contact" class="mobile-nav-link text-brand-muted hover:text-white py-1 transition-colors">Contact</a>
+      </nav>
+      <div class="pt-4 border-t border-brand-border">
+        <a href="#contact" class="mobile-nav-link block text-center w-full py-3 text-xs font-mono tracking-wider font-semibold uppercase text-brand-void bg-brand-gold rounded-sm shadow-gold-sm">
+          Start a Project
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen pt-32 pb-20 md:pt-40 md:pb-28 flex items-center bg-grid-pattern overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+        
+        <!-- Left Content Column -->
+        <div class="lg:col-span-7 flex flex-col items-start space-y-6 md:space-y-8">
+          
+          <!-- System Eyebrow Badge -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-surface border border-brand-border text-xs font-mono tracking-widest text-brand-gold uppercase">
+            <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+            DIGITAL SYSTEMS • AI • AUTOMATION • CONVERSION
+          </div>
+
+          <!-- Headline -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] text-white">
+            BUILD A DIGITAL SYSTEM THAT ACTUALLY <span class="gold-gradient-text">MOVES YOUR BUSINESS FORWARD.</span>
+          </h1>
+
+          <!-- Supporting Copy -->
+          <p class="text-base sm:text-lg text-brand-muted max-w-2xl font-normal leading-relaxed">
+            We engineer websites, structured funnels, AI-powered workflows, and business automation systems that turn raw attention into qualified leads, pipeline velocity, and predictable enterprise revenue.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2">
+            <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-bold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-glow hover:brightness-110 transition-all duration-300">
+              Build Your System
+              <i class="fa-solid fa-arrow-right ml-3 text-xs"></i>
+            </a>
+            <a href="#work" class="inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-semibold text-brand-offwhite bg-brand-surface/70 border border-brand-border hover:border-brand-gold/60 hover:bg-brand-surfaceLight transition-all duration-200">
+              View Our Work
+            </a>
+          </div>
+
+          <!-- Enterprise Trust Indicators -->
+          <div class="pt-6 border-t border-brand-border/80 grid grid-cols-3 gap-6 w-full max-w-lg">
+            <div>
+              <div class="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">100%</div>
+              <div class="text-[11px] font-mono tracking-wider text-brand-muted uppercase mt-0.5">Engineered Flow</div>
+            </div>
+            <div>
+              <div class="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">24/7</div>
+              <div class="text-[11px] font-mono tracking-wider text-brand-muted uppercase mt-0.5">Automated Capture</div>
+            </div>
+            <div>
+              <div class="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">&lt;350ms</div>
+              <div class="text-[11px] font-mono tracking-wider text-brand-muted uppercase mt-0.5">System Latency</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual Column: 3D System Pipeline Matrix -->
+        <div class="lg:col-span-5 relative perspective-1000">
+          <div class="relative w-full rounded-2xl bg-gradient-to-b from-brand-surfaceLight/80 to-brand-surface/90 border border-brand-borderLight p-6 shadow-card-depth backdrop-blur-md transition-transform duration-500 hover:rotate-1">
+            
+            <!-- Terminal Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-brand-border/60">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                <span class="text-[11px] font-mono tracking-wider text-brand-muted ml-2">SYSTEM_TOPOLOGY_v4.2</span>
+              </div>
+              <div class="text-[10px] font-mono px-2 py-0.5 bg-brand-gold/10 text-brand-gold border border-brand-gold/20 rounded">
+                STATUS: ACTIVE
+              </div>
+            </div>
+
+            <!-- Visual Flow Stages -->
+            <div class="py-6 space-y-3 relative">
+              
+              <!-- Subtle vertical line through stages -->
+              <div class="absolute left-6 top-7 bottom-7 w-[2px] bg-gradient-to-b from-brand-gold via-brand-border to-brand-gold/40"></div>
+
+              <!-- Stage 1 -->
+              <div class="flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-border hover:border-brand-gold/40 transition-all relative z-10 group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-7 h-7 rounded-md bg-brand-void border border-brand-border flex items-center justify-center text-xs text-brand-gold group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-users text-[11px]"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-semibold text-white">Targeted Traffic</div>
+                    <div class="text-[10px] text-brand-muted">Search, Ads, Direct Channels</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono text-brand-gold/80 bg-brand-void px-2 py-0.5 rounded border border-brand-border">Node 01</span>
+              </div>
+
+              <!-- Stage 2 -->
+              <div class="flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-border hover:border-brand-gold/40 transition-all relative z-10 group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-7 h-7 rounded-md bg-brand-void border border-brand-border flex items-center justify-center text-xs text-brand-gold group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-layer-group text-[11px]"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-semibold text-white">Conversion Architecture</div>
+                    <div class="text-[10px] text-brand-muted">High-Intent Landing Interface</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono text-brand-gold/80 bg-brand-void px-2 py-0.5 rounded border border-brand-border">Node 02</span>
+              </div>
+
+              <!-- Stage 3 -->
+              <div class="flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-border hover:border-brand-gold/40 transition-all relative z-10 group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-7 h-7 rounded-md bg-brand-void border border-brand-border flex items-center justify-center text-xs text-brand-gold group-hover:scale-105 transition-transform">
+                    <i class="fa-brands fa-whatsapp text-[12px]"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-semibold text-white">Automated Engagement</div>
+                    <div class="text-[10px] text-brand-muted">Instant WhatsApp & CRM Sync</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono text-emerald-400/90 bg-brand-void px-2 py-0.5 rounded border border-brand-border">Instant</span>
+              </div>
+
+              <!-- Stage 4 -->
+              <div class="flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-gold/30 shadow-gold-sm relative z-10 group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-7 h-7 rounded-md bg-brand-gold text-brand-void flex items-center justify-center text-xs font-bold">
+                    <i class="fa-solid fa-chart-line text-[11px]"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-semibold text-white">Commercial Conversion</div>
+                    <div class="text-[10px] text-brand-goldLight">Monetized Client Acquisition</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded border border-brand-gold/30">Target</span>
+              </div>
+            </div>
+
+            <!-- Footer metric bar -->
+            <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] font-mono text-brand-muted">
+              <span>PIPELINE HEALTH: OPTIMAL</span>
+              <span class="text-brand-gold">EFFICIENCY: +100%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CORE CAPABILITIES (SERVICES) SECTION -->
+    <section id="services" class="py-24 md:py-32 bg-brand-surface/30 border-t border-brand-border relative">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-16 md:mb-20">
+          <div class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-3">SYSTEM CAPABILITIES</div>
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white mb-5">
+            Engineered For Frictionless Performance.
+          </h2>
+          <p class="text-base text-brand-muted leading-relaxed">
+            We eliminate fragmented touchpoints. Every component is designed, tested, and integrated into a single high-efficiency business infrastructure.
+          </p>
+        </div>
+
+        <!-- 6 Core Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          
+          <!-- Card 1 -->
+          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
+                <i class="fa-solid fa-desktop text-lg"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">High-Converting Websites</h3>
+              <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                Editorial, high-speed web platforms engineered around your primary commercial objectives. Fast, responsive, accessible, and structured to convert attention into action.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+              <span>Conversion-First UX</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
+                <i class="fa-solid fa-crosshairs text-lg"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Targeted Landing Pages</h3>
+              <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                Single-purpose landing pages built to maximize acquisition efficiency. Uncompromising messaging hierarchy, zero distraction, and direct value proposition articulation.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+              <span>Frictionless Funnel</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
+                <i class="fa-solid fa-filter-circle-dollar text-lg"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Structured Sales Funnels</h3>
+              <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                Multi-step acquisition architectures that guide prospects through discovery, qualification, proposal, and checkout with quantifiable velocity.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+              <span>Automated Qualification</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
+                <i class="fa-solid fa-microchip text-lg"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">AI Systems & Agents</h3>
+              <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                Autonomous AI agents and data extraction pipelines designed to qualify inquiries, draft proposals, categorize requirements, and eliminate internal drag.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+              <span>Operational Automation</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
+                <i class="fa-solid fa-bolt-lightning text-lg"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Business Automation</h3>
+              <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                Deep integrations across WhatsApp Business, CRMs, Stripe, webhooks, and client databases. Zero manual re-entry and immediate notifications for high-priority leads.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+              <span>CRM & Webhooks</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
+                <i class="fa-solid fa-arrows-split-up-and-left text-lg"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Unified Conversion Systems</h3>
+              <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                The entire digital ecosystem synchronized: incoming search, positioning, instant WhatsApp follow-up sequences, and seamless payment collection tied together.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+              <span>End-to-End Synergy</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- THE DIGITAL SYSTEM ARCHITECTURE (VISUAL INTERACTIVE FLOW) -->
+    <section id="systems" class="py-24 md:py-36 bg-brand-void border-t border-brand-border relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-20">
+          <span class="px-3.5 py-1 rounded-full bg-brand-surface border border-brand-border text-xs font-mono tracking-widest text-brand-gold uppercase">
+            COMPLETE ARCHITECTURE
+          </span>
+          <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mt-4 mb-4">
+            YOUR WEBSITE IS ONLY ONE PART OF THE SYSTEM.
+          </h2>
+          <p class="text-base text-brand-muted leading-relaxed">
+            We connect the important parts of the digital customer journey so your website doesn't just look good — it has a measurable job to do.
+          </p>
+        </div>
+
+        <!-- System Pipeline Flow Visualization -->
+        <div class="relative bg-brand-surface border border-brand-border rounded-2xl p-6 md:p-10 shadow-2xl">
+          
+          <!-- Decorative Status Line -->
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-8 mb-8 border-b border-brand-border text-xs font-mono text-brand-muted">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-brand-gold"></span>
+              <span class="text-white uppercase font-medium">PIPELINE MONITOR</span>
+            </div>
+            <div class="flex items-center gap-6">
+              <span>NODES: 9 OPERATIONAL</span>
+              <span class="text-brand-gold">FLOW: CONTINUOUS</span>
+            </div>
+          </div>
+
+          <!-- Flow Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 relative">
+            
+            <!-- Step 1 -->
+            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
+              <div class="text-[10px] font-mono text-brand-gold mb-1">01 / DISCOVERY</div>
+              <div class="text-sm font-bold text-white mb-1">Target Traffic</div>
+              <p class="text-xs text-brand-muted">Precision acquisition from high-intent search, referral channels, and outbound.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
+              <div class="text-[10px] font-mono text-brand-gold mb-1">02 / DESTINATION</div>
+              <div class="text-sm font-bold text-white mb-1">Authority Website</div>
+              <p class="text-xs text-brand-muted">Immediate positioning clarity, brand credibility, and frictionless navigation.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
+              <div class="text-[10px] font-mono text-brand-gold mb-1">03 / CONVERSION</div>
+              <div class="text-sm font-bold text-white mb-1">Landing Experience</div>
+              <p class="text-xs text-brand-muted">Singular focus, elimination of decision paralysis, and direct value proof.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
+              <div class="text-[10px] font-mono text-brand-gold mb-1">04 / IDENTIFICATION</div>
+              <div class="text-sm font-bold text-white mb-1">Lead Capture Node</div>
+              <p class="text-xs text-brand-muted">Frictionless smart forms, qualification questions, and immediate CRM ingestion.</p>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
+              <div class="text-[10px] font-mono text-brand-gold mb-1">05 / DIRECT CHANNEL</div>
+              <div class="text-sm font-bold text-white mb-1">WhatsApp Integration</div>
+              <p class="text-xs text-brand-muted">Instant verification, conversation initiation, and direct enterprise routing.</p>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
+              <div class="text-[10px] font-mono text-brand-gold mb-1">06 / NURTURE</div>
+              <div class="text-sm font-bold text-white mb-1">Automated Follow-Up</div>
+              <p class="text-xs text-brand-muted">Timed sequences, contextual case study delivery, and schedule link triggers.</p>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
+              <div class="text-[10px] font-mono text-brand-gold mb-1">07 / PROPOSITION</div>
+              <div class="text-sm font-bold text-white mb-1">Dynamic Offer</div>
+              <p class="text-xs text-brand-muted">Tailored scope, tiered enterprise pricing, and clear deliverables.</p>
+            </div>
+
+            <!-- Step 8 -->
+            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
+              <div class="text-[10px] font-mono text-brand-gold mb-1">08 / TRANSACTION</div>
+              <div class="text-sm font-bold text-white mb-1">Secure Payment</div>
+              <p class="text-xs text-brand-muted">Automated invoicing, Stripe/gateway verification, and receipt generation.</p>
+            </div>
+
+            <!-- Step 9 -->
+            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-gold/40 bg-brand-gold/5 transition-all">
+              <div class="text-[10px] font-mono text-brand-gold mb-1">09 / RETENTION</div>
+              <div class="text-sm font-bold text-white mb-1">Client Onboarding</div>
+              <p class="text-xs text-brand-muted">Instant dashboard access, welcome protocols, and continuous engagement.</p>
+            </div>
+
+          </div>
+
+          <!-- Bottom Visual Bar -->
+          <div class="mt-8 p-4 rounded-lg bg-brand-void border border-brand-border flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-network-wired text-brand-gold"></i>
+              <span class="text-xs text-brand-offwhite">Traditional sites stop at Node 02. We build all 9 synchronized layers.</span>
+            </div>
+            <a href="#contact" class="text-xs font-mono font-semibold uppercase text-brand-gold hover:text-white transition-colors flex items-center gap-2">
+              Deploy Your System <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CASE STUDIES / WORK SECTION -->
+    <section id="work" class="py-24 md:py-32 bg-brand-surface/20 border-t border-brand-border">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">SELECTED SYSTEMS DEPLOYED</span>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white">Proven System Blueprints.</h2>
+          </div>
+          <p class="text-sm text-brand-muted max-w-md">
+            Real architectural models delivered for enterprise operators, specialized coaches, high-ticket consultants, and service firms.
+          </p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Project 1 -->
+          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col">
+            <div class="h-60 bg-gradient-to-br from-brand-surfaceLight via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void px-3 py-1 rounded border border-brand-border">High-Ticket Consulting</span>
+                <span class="text-xs text-brand-muted"><i class="fa-solid fa-link text-brand-gold mr-1"></i> Architecture Live</span>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white">Executive Advisory System</h3>
+                <p class="text-xs text-brand-muted font-mono mt-1">Direct calendar qualification + WhatsApp validation</p>
+              </div>
+            </div>
+            <div class="p-6 md:p-8 space-y-4 flex-1 flex flex-col justify-between bg-brand-surface/90">
+              <div class="space-y-3 text-xs leading-relaxed text-brand-muted">
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Challenge:</strong> Low-quality discovery calls consuming partner calendar capacity.</div>
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Engineered Solution:</strong> Strict multi-step application gate with pre-qualification conditional routing.</div>
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Delivered Outcome:</strong> Automated filtering resulting in 100% executive-qualified inbound consultations.</div>
+              </div>
+              <div class="pt-4 border-t border-brand-border flex items-center justify-between">
+                <span class="text-xs font-mono text-brand-gold">Funnel + WhatsApp Automation</span>
+                <a href="#contact" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col">
+            <div class="h-60 bg-gradient-to-br from-brand-surfaceLight via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void px-3 py-1 rounded border border-brand-border">Wellness & Healthcare</span>
+                <span class="text-xs text-brand-muted"><i class="fa-solid fa-link text-brand-gold mr-1"></i> Architecture Live</span>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white">Clinical Intake & Conversion Hub</h3>
+                <p class="text-xs text-brand-muted font-mono mt-1">Multi-location patient intake + instant routing</p>
+              </div>
+            </div>
+            <div class="p-6 md:p-8 space-y-4 flex-1 flex flex-col justify-between bg-brand-surface/90">
+              <div class="space-y-3 text-xs leading-relaxed text-brand-muted">
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Challenge:</strong> High bounce rates on generic services overview pages and phone line drop-offs.</div>
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Engineered Solution:</strong> Dedicated condition-specific landing matrices with instant WhatsApp desk dispatch.</div>
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Delivered Outcome:</strong> Frictionless patient registration pipeline operating around the clock.</div>
+              </div>
+              <div class="pt-4 border-t border-brand-border flex items-center justify-between">
+                <span class="text-xs font-mono text-brand-gold">Web Architecture + AI Routing</span>
+                <a href="#contact" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col">
+            <div class="h-60 bg-gradient-to-br from-brand-surfaceLight via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void px-3 py-1 rounded border border-brand-border">Author & Keynote Speaker</span>
+                <span class="text-xs text-brand-muted"><i class="fa-solid fa-link text-brand-gold mr-1"></i> Architecture Live</span>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white">Personal Brand Monopolization Hub</h3>
+                <p class="text-xs text-brand-muted font-mono mt-1">Content engine tied directly into high-ticket booking</p>
+              </div>
+            </div>
+            <div class="p-6 md:p-8 space-y-4 flex-1 flex flex-col justify-between bg-brand-surface/90">
+              <div class="space-y-3 text-xs leading-relaxed text-brand-muted">
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Challenge:</strong> Large social following generating zero structured speaking inquiries or direct sales.</div>
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Engineered Solution:</strong> Fast-loading bespoke editorial portal featuring direct event planner booking funnels.</div>
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Delivered Outcome:</strong> Automated lead capture converting media appearances into secured bookings.</div>
+              </div>
+              <div class="pt-4 border-t border-brand-border flex items-center justify-between">
+                <span class="text-xs font-mono text-brand-gold">Editorial UX + Funnel Flow</span>
+                <a href="#contact" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col">
+            <div class="h-60 bg-gradient-to-br from-brand-surfaceLight via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void px-3 py-1 rounded border border-brand-border">B2B Professional Services</span>
+                <span class="text-xs text-brand-muted"><i class="fa-solid fa-link text-brand-gold mr-1"></i> Architecture Live</span>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white">Autonomous RFP Ingestion Pipeline</h3>
+                <p class="text-xs text-brand-muted font-mono mt-1">AI-assisted lead categorization + proposal dispatch</p>
+              </div>
+            </div>
+            <div class="p-6 md:p-8 space-y-4 flex-1 flex flex-col justify-between bg-brand-surface/90">
+              <div class="space-y-3 text-xs leading-relaxed text-brand-muted">
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Challenge:</strong> Slow turnaround time on custom quotes resulting in lost enterprise deals.</div>
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Engineered Solution:</strong> AI logic gate analyzing form submissions, estimating timelines, and generating draft statements of work.</div>
+                <div><strong class="text-white font-mono uppercase text-[10px] block mb-1">Delivered Outcome:</strong> Response latency reduced from 48 hours to 8 minutes.</div>
+              </div>
+              <div class="pt-4 border-t border-brand-border flex items-center justify-between">
+                <span class="text-xs font-mono text-brand-gold">AI Workflows + CRM Integration</span>
+                <a href="#contact" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SYSTEMATIC EXECUTION PROCESS -->
+    <section id="process" class="py-24 md:py-32 bg-brand-void border-t border-brand-border">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        
+        <!-- Header -->
+        <div class="max-w-3xl mb-16">
+          <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">METHODICAL DEPLOYMENT</span>
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
+            How We Build Your Growth Engine.
+          </h2>
+          <p class="text-base text-brand-muted">
+            A battle-tested 6-stage engineering process designed to eliminate guesswork, technical debt, and revenue leaks.
+          </p>
+        </div>
+
+        <!-- 6 Step Timeline -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+            <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">01</span>
+            <h3 class="text-lg font-bold text-white mb-2">Discover & Audit</h3>
+            <p class="text-xs text-brand-muted leading-relaxed">
+              We deconstruct your existing traffic, bottlenecks, unit economics, audience psychology, and current conversion barriers.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+            <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">02</span>
+            <h3 class="text-lg font-bold text-white mb-2">Architect & Strategize</h3>
+            <p class="text-xs text-brand-muted leading-relaxed">
+              Map the user journey from discovery to settlement. We blueprint page flows, lead magnets, messaging angles, and CRM connections.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+            <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">03</span>
+            <h3 class="text-lg font-bold text-white mb-2">Design & Visual Identity</h3>
+            <p class="text-xs text-brand-muted leading-relaxed">
+              Craft dark-mode, high-end editorial UI/UX interfaces that establish immediate authority and instill unquestioned trust.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+            <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">04</span>
+            <h3 class="text-lg font-bold text-white mb-2">Engineer & Automate</h3>
+            <p class="text-xs text-brand-muted leading-relaxed">
+              Write clean, high-speed code with sub-second page loads. Integrate webhooks, WhatsApp Business APIs, and AI classification logic.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+            <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">05</span>
+            <h3 class="text-lg font-bold text-white mb-2">QA & Stress-Testing</h3>
+            <p class="text-xs text-brand-muted leading-relaxed">
+              Thorough cross-browser and cross-device testing. We audit form submission triggers, webhook payloads, and conversion tracking scripts.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+            <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">06</span>
+            <h3 class="text-lg font-bold text-white mb-2">Launch & System Evolution</h3>
+            <p class="text-xs text-brand-muted leading-relaxed">
+              DNS deployment, analytics tracking verification, and post-launch optimization based on real-world session data and behavior maps.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE AURA (STANDARDS) -->
+    <section class="py-24 bg-brand-surface/30 border-t border-brand-border">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-5">
+            <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">OUR OPERATING STANDARD</span>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-6">
+              Built Specifically For Business Outcomes, Not Vanity.
+            </h2>
+            <p class="text-sm text-brand-muted leading-relaxed mb-6">
+              Most design studios build static art pieces that sit dormant. We construct interconnected digital machines with a single purpose: capturing enterprise demand and accelerating conversion.
+            </p>
+            <div class="space-y-4 font-mono text-xs text-brand-offwhite">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-check text-brand-gold"></i>
+                <span>Strictly zero bloatware or heavy page builders</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-check text-brand-gold"></i>
+                <span>Direct CRM, API, and WhatsApp integration</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-check text-brand-gold"></i>
+                <span>Enterprise grade security and rapid CDN delivery</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            
+            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border">
+              <i class="fa-solid fa-bullseye text-brand-gold text-xl mb-4"></i>
+              <h3 class="text-base font-bold text-white mb-2">Business-First Decisioning</h3>
+              <p class="text-xs text-brand-muted leading-relaxed">Every typography selection, layout choice, and API hook is calculated against customer acquisition.</p>
+            </div>
+
+            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border">
+              <i class="fa-solid fa-bolt text-brand-gold text-xl mb-4"></i>
+              <h3 class="text-base font-bold text-white mb-2">Conversion Architecture</h3>
+              <p class="text-xs text-brand-muted leading-relaxed">Cognitive load is reduced. The interface systematically guides attention toward primary conversion actions.</p>
+            </div>
+
+            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border">
+              <i class="fa-solid fa-robot text-brand-gold text-xl mb-4"></i>
+              <h3 class="text-base font-bold text-white mb-2">Automated Operations</h3>
+              <p class="text-xs text-brand-muted leading-relaxed">Replace manual data transcription with automated pipelines that trigger the moment an inquiry lands.</p>
+            </div>
+
+            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border">
+              <i class="fa-solid fa-shield-halved text-brand-gold text-xl mb-4"></i>
+              <h3 class="text-base font-bold text-white mb-2">Engineered For Scale</h3>
+              <p class="text-xs text-brand-muted leading-relaxed">Built on modular foundations ready to support 100 or 100,000 inquiries without architectural refactoring.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 md:py-32 bg-brand-void border-t border-brand-border">
+      <div class="max-w-5xl mx-auto px-6 lg:px-12">
+        <div class="p-8 md:p-14 rounded-2xl bg-brand-surface border border-brand-border relative overflow-hidden">
+          
+          <div class="relative z-10 space-y-6">
+            <span class="text-xs font-mono uppercase tracking-widest text-brand-gold block">COMPANY PHILOSOPHY</span>
+            <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-white leading-tight">
+              We build digital systems that connect design, technology, and business growth.
+            </h2>
+            <div class="text-sm md:text-base text-brand-muted space-y-4 leading-relaxed font-normal">
+              <p>
+                In an era where standard web pages have become commoditized, aesthetic appeal alone yields diminishing returns. Businesses do not require more disconnected templates; they require operational systems.
+              </p>
+              <p>
+                AURA Digital Systems operates at the intersection of conversion strategy, bespoke interface engineering, and autonomous process orchestration. We partner with ambitious organizations worldwide to eliminate manual sales friction and construct resilient digital infrastructure.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-brand-border flex flex-wrap gap-8 text-xs font-mono text-brand-muted uppercase">
+              <div><span class="text-white font-bold">FOCUS:</span> Enterprise Conversion Infrastructure</div>
+              <div><span class="text-white font-bold">ETHOS:</span> Measurable Revenue Velocity</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CALL TO ACTION (CINEMATIC) -->
+    <section class="py-24 md:py-36 bg-gradient-to-b from-brand-void via-brand-surface/60 to-brand-void border-t border-brand-border relative text-center">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
+        <span class="text-xs font-mono tracking-widest uppercase text-brand-gold px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/5 inline-block mb-6">
+          IMMEDIATE PIPELINE ACCELERATION
+        </span>
+        <h2 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+          HAVE A BUSINESS GOAL?<br>
+          <span class="gold-gradient-text">LET’S BUILD THE SYSTEM BEHIND IT.</span>
+        </h2>
+        <p class="text-base md:text-lg text-brand-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+          Whether you need an authoritative website, high-converting funnel, AI automated workflow, or an integrated customer acquisition pipeline, let's engineer something built for scale.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-bold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-glow hover:brightness-110 transition-all duration-300">
+            Start A Project
+            <i class="fa-solid fa-arrow-right ml-3 text-xs"></i>
+          </a>
+          <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-semibold text-brand-offwhite bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-colors">
+            <i class="fa-brands fa-whatsapp mr-2.5 text-emerald-400 text-sm"></i>
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT INQUIRY SECTION -->
+    <section id="contact" class="py-24 md:py-32 bg-brand-surface/40 border-t border-brand-border relative">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <!-- Left Info Column -->
+          <div class="lg:col-span-5 space-y-8">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">PROJECT INITIATION</span>
+              <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+                Begin Your Digital Transformation.
+              </h2>
+              <p class="text-sm text-brand-muted leading-relaxed">
+                Submit your project specifications. Our systems architects review inquiries within 24 hours to schedule your preliminary scoping session.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded bg-brand-void border border-brand-border flex items-center justify-center text-brand-gold shrink-0">
+                  <i class="fa-solid fa-shield-halved text-xs"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white">Direct Scoping Call</div>
+                  <div class="text-[11px] text-brand-muted">Speak directly with senior systems developers, not non-technical sales agents.</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded bg-brand-void border border-brand-border flex items-center justify-center text-brand-gold shrink-0">
+                  <i class="fa-solid fa-file-contract text-xs"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white">Comprehensive System Blueprint</div>
+                  <div class="text-[11px] text-brand-muted">Receive a transparent architecture map and deliverables roadmap upfront.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="font-mono text-xs text-brand-muted space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>SYSTEM INTAKE PIPELINE: OPERATIONAL</span>
+              </div>
+              <div class="text-[11px] text-brand-muted/80">
+                Responses delivered via secure email and direct WhatsApp within one business day.
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form Right Column -->
+          <div class="lg:col-span-7">
+            <div class="p-8 md:p-10 rounded-2xl bg-brand-surface border border-brand-border shadow-2xl">
+              
+              <form id="contactForm" class="space-y-6" onsubmit="event.preventDefault(); handleFormSubmit();">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <!-- Name -->
+                  <div>
+                    <label for="fullName" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">Your Name *</label>
+                    <input type="text" id="fullName" required placeholder="e.g. Alexander Vance" class="w-full px-4 py-3 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors">
+                  </div>
+
+                  <!-- Business Name -->
+                  <div>
+                    <label for="businessName" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">Business / Company *</label>
+                    <input type="text" id="businessName" required placeholder="e.g. Vance Capital or Solo Practice" class="w-full px-4 py-3 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <!-- Email -->
+                  <div>
+                    <label for="workEmail" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">Corporate Email *</label>
+                    <input type="email" id="workEmail" required placeholder="alexander@company.com" class="w-full px-4 py-3 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors">
+                  </div>
+
+                  <!-- WhatsApp / Phone -->
+                  <div>
+                    <label for="phoneNum" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">WhatsApp / Phone *</label>
+                    <input type="tel" id="phoneNum" required placeholder="+1 (555) 019-2834" class="w-full px-4 py-3 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors">
+                  </div>
+                </div>
+
+                <!-- What Do You Need? Dropdown -->
+                <div>
+                  <label for="projectScope" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">Primary Objective *</label>
+                  <select id="projectScope" required class="w-full px-4 py-3 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors">
+                    <option value="" disabled selected>Select system requirement...</option>
+                    <option value="Complete Digital System">Complete Digital System (Website + Funnel + Automation)</option>
+                    <option value="High-Converting Website">High-Converting Corporate / Brand Website</option>
+                    <option value="Sales Funnel Architecture">Sales Funnel & Landing Page Optimization</option>
+                    <option value="AI Workflow Automation">AI-Powered System & Process Automation</option>
+                    <option value="WhatsApp Follow-up Pipeline">WhatsApp Direct Customer Follow-up Engine</option>
+                  </select>
+                </div>
+
+                <!-- Budget Range -->
+                <div>
+                  <label for="budgetRange" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">Anticipated Capital Allocation</label>
+                  <select id="budgetRange" class="w-full px-4 py-3 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors">
+                    <option value="Standard Implementation">Standard Implementation ($2,500 – $5,000)</option>
+                    <option value="Growth System Architecture">Growth System Architecture ($5,000 – $10,000)</option>
+                    <option value="Enterprise Complete Deployment">Enterprise Complete Deployment ($10,000+)</option>
+                  </select>
+                </div>
+
+                <!-- Project Details -->
+                <div>
+                  <label for="projectDetails" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">Project Brief & Requirements</label>
+                  <textarea id="projectDetails" rows="4" placeholder="Detail your current business bottlenecks, objectives, and what you need your digital system to accomplish..." class="w-full px-4 py-3 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors resize-none"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" class="w-full py-4 text-xs font-mono uppercase tracking-widest font-bold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-sm hover:shadow-gold-glow hover:brightness-110 transition-all duration-300">
+                  Submit System Specifications
+                </button>
+
+                <!-- Feedback Toast -->
+                <div id="formSuccess" class="hidden p-4 rounded bg-emerald-950/60 border border-emerald-500/50 text-emerald-200 text-xs font-mono">
+                  <i class="fa-solid fa-check-circle mr-2 text-emerald-400"></i>
+                  System inquiry transmitted successfully. A lead architect will review your specifications and contact your designated channel shortly.
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-void border-t border-brand-border py-16 text-brand-muted text-xs">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-10">
+      
+      <!-- Brand column -->
+      <div class="md:col-span-5 space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 rounded bg-brand-surface border border-brand-border flex items-center justify-center text-brand-gold">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <span class="font-mono text-sm tracking-widest text-white uppercase font-bold">AURA DIGITAL SYSTEMS</span>
+        </div>
+        <p class="max-w-sm text-brand-muted leading-relaxed">
+          Engineering high-conversion business websites, structured funnels, and autonomous AI pipelines for forward-thinking enterprises.
+        </p>
+        <div class="font-mono text-[11px] text-brand-gold">
+          OPERATIONAL STATE: GLOBAL
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="md:col-span-3 space-y-3 font-mono">
+        <div class="text-white uppercase font-semibold text-xs tracking-wider">Navigation</div>
+        <ul class="space-y-2">
+          <li><a href="#services" class="hover:text-white transition-colors">Capabilities</a></li>
+          <li><a href="#systems" class="hover:text-white transition-colors">The 9-Node Architecture</a></li>
+          <li><a href="#work" class="hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="#process" class="hover:text-white transition-colors">Methodology</a></li>
+          <li><a href="#contact" class="hover:text-white transition-colors">Initiate Project</a></li>
+        </ul>
+      </div>
+
+      <!-- Technical Capabilities -->
+      <div class="md:col-span-4 space-y-3 font-mono">
+        <div class="text-white uppercase font-semibold text-xs tracking-wider">Capabilities Matrix</div>
+        <p class="text-[11px] text-brand-muted leading-relaxed">
+          Conversion Design • Dynamic Landing Pages • AI Ingestion • WhatsApp CRM Flow • Automated Scheduling • Stripe Integration • Performance Optimization
+        </p>
+        <div class="pt-4 text-[11px] text-brand-muted/70">
+          &copy; 2026 AURA Digital Systems. All rights reserved. Enterprise Digital Architecture.
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Light Javascript Logic for UI & Form Interactivity -->
+  <script>
+    // Mobile Drawer Navigation Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('hidden');
+        if (mobileMenu.classList.contains('hidden')) {
+          menuIcon.classList.remove('fa-xmark');
+          menuIcon.classList.add('fa-bars-staggered');
+        } else {
+          menuIcon.classList.remove('fa-bars-staggered');
+          menuIcon.classList.add('fa-xmark');
+        }
+      });
+
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          menuIcon.classList.remove('fa-xmark');
+          menuIcon.classList.add('fa-bars-staggered');
+        });
+      });
+    }
+
+    // Scroll Navbar Elevation Effect
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('shadow-lg', 'bg-brand-void/95');
+        header.classList.remove('bg-brand-void/80');
+      } else {
+        header.classList.remove('shadow-lg', 'bg-brand-void/95');
+        header.classList.add('bg-brand-void/80');
+      }
+    });
+
+    // Contact Form Ingestion Simulation
+    function handleFormSubmit() {
+      const btn = document.getElementById('submitBtn');
+      const successBox = document.getElementById('formSuccess');
+      
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Transmitting System Brief...';
+      
+      setTimeout(() => {
+        btn.classList.add('hidden');
+        successBox.classList.remove('hidden');
+        document.getElementById('contactForm').reset();
+      }, 1100);
+    }
+  </script>
+</body>
+</html>
