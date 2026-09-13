@@ -78,13 +78,7 @@
       font-feature-settings: "cv02", "cv03", "cv04", "cv11";
       overflow-x: hidden;
     }
-    
-    .bg-grid-pattern {
-      background-size: 40px 40px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    }
+
     .gold-gradient-text {
       background: linear-gradient(135deg, #FFFFFF 0%, #F3E5AB 50%, #C5A059 100%);
       -webkit-background-clip: text;
@@ -254,11 +248,7 @@
       animation: orbFloat 14s ease-in-out infinite alternate;
     }
 
-    /* =========================================================================
-       DYNAMIC SCROLL-BASED OUTSIDE → INSIDE / INSIDE → OUTSIDE ENGINE
-       Animates elements from outside viewport into place when scrolling down,
-       and pulls them back out when scrolling up or leaving view.
-       ========================================================================= */
+    /* Dynamic Scroll-Based Outside ↔ Inside Transitions */
     .scroll-dynamic {
       opacity: 0;
       transition: 
@@ -266,8 +256,6 @@
         opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform, opacity;
     }
-
-    /* Directional Off-Screen Starting States (OUTSIDE) */
     .scroll-from-left {
       transform: translate3d(-110px, 0, 0) scale(0.94) rotateY(9deg);
     }
@@ -280,22 +268,17 @@
     .scroll-from-bottom {
       transform: translate3d(0, 95px, 0) scale(0.94);
     }
-
-    /* Dynamic Stagger Delays for Rich Cascade */
     .delay-1 { transition-delay: 0.08s; }
     .delay-2 { transition-delay: 0.16s; }
     .delay-3 { transition-delay: 0.24s; }
     .delay-4 { transition-delay: 0.32s; }
     .delay-5 { transition-delay: 0.40s; }
     .delay-6 { transition-delay: 0.48s; }
-
-    /* Settled In-Place State (INSIDE) */
     .scroll-dynamic.is-inside {
       opacity: 1 !important;
       transform: translate3d(0, 0, 0) scale(1) rotateY(0deg) !important;
     }
 
-    /* Live Toast Notification animation */
     @keyframes toastSlide {
       0% { transform: translateX(120%); opacity: 0; }
       15% { transform: translateX(0); opacity: 1; }
@@ -354,7 +337,10 @@
 </head>
 <body class="bg-brand-void text-brand-offwhite antialiased selection:bg-brand-gold selection:text-brand-void">
 
-  <!-- PERSISTENT HERO 3D LAYER CONTAINER -->
+  <!-- 1. INTERACTIVE DOT MATRIX CANVAS (Replaces flat 2D grid with responsive mouse-reactive dots) -->
+  <canvas id="dotMatrixCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <!-- 2. PERSISTENT HERO 3D LAYER CONTAINER -->
   <div id="hero-3d-persistent-wrap" class="fixed inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-700 ease-out">
     <canvas id="hero-3d-canvas" class="w-full h-full pointer-events-auto opacity-75"></canvas>
   </div>
@@ -396,8 +382,15 @@
         <a href="#contact" class="nav-link hover:text-white transition-colors duration-200">Contact</a>
       </nav>
 
-      <!-- Action Buttons Desktop -->
-      <div class="hidden md:flex items-center gap-4">
+      <!-- Action Buttons Desktop + Sound Control Toggle -->
+      <div class="hidden md:flex items-center gap-3">
+        
+        <!-- Subtle Audio UI Toggle Button -->
+        <button id="audioToggleBtn" onclick="toggleAudio()" class="px-2.5 py-1.5 rounded border border-brand-border bg-brand-surface/80 text-brand-muted hover:text-brand-gold hover:border-brand-gold/40 transition-colors text-[11px] font-mono flex items-center gap-1.5 cursor-pointer" title="Toggle Sound Feedback">
+          <i class="fa-solid fa-volume-high text-xs text-brand-gold" id="audioIcon"></i>
+          <span id="audioText">AUDIO: ON</span>
+        </button>
+
         <a href="https://wa.me/917623954045?text=Hello%20BuildWithBhavyee,%20I%20am%20interested%20in%20building%20a%20digital%20system." target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-emerald-500/25 bg-emerald-500/5 backdrop-blur-sm" title="Direct WhatsApp Support">
           <i class="fa-brands fa-whatsapp text-sm"></i>
           <span>+91 7623954045</span>
@@ -424,6 +417,12 @@
         <a href="#contact" class="mobile-nav-link text-brand-muted hover:text-white py-1 transition-colors">Contact</a>
       </nav>
       <div class="pt-4 border-t border-brand-border space-y-3">
+        <div class="flex items-center justify-between pb-1">
+          <span class="text-xs font-mono text-brand-muted">Subtle Audio Effects:</span>
+          <button onclick="toggleAudio()" class="px-2.5 py-1 text-[11px] font-mono rounded border border-brand-border text-brand-gold">
+            <span id="mobileAudioText">AUDIO: ON</span>
+          </button>
+        </div>
         <a href="https://wa.me/917623954045?text=Hello%20BuildWithBhavyee,%20I%20am%20interested%20in%20building%20a%20digital%20system." target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-sm">
           <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp +91 7623954045
         </a>
@@ -436,7 +435,7 @@
 
   <main class="relative z-10">
     <!-- HERO SECTION -->
-    <section id="hero" class="relative min-h-screen pt-32 pb-20 md:pt-40 md:pb-28 flex items-center bg-grid-pattern overflow-hidden">
+    <section id="hero" class="relative min-h-screen pt-32 pb-20 md:pt-40 md:pb-28 flex items-center overflow-hidden">
       
       <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10 pointer-events-none">
         
@@ -570,7 +569,7 @@
 
             <!-- Footer metric bar with interactive 3D particle toggle hint -->
             <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] font-mono text-brand-muted">
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-cube text-brand-gold text-[10px]"></i> 3D PERSISTENT ENGINE</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-cube text-brand-gold text-[10px]"></i> DOT MATRIX + 3D ENGINE</span>
               <span class="text-brand-gold">MOVE CURSOR TO TILT</span>
             </div>
           </div>
@@ -1776,11 +1775,205 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- JAVASCRIPT: THREE.JS 3D CANVAS, OUTSIDE/INSIDE SCROLL ENGINE, POPUPS & MODALS -->
+  <!-- JAVASCRIPT: DOT MATRIX CANVAS, WEB AUDIO UI, THREE.JS 3D, DYNAMIC SCROLL -->
   <!-- ========================================================================= -->
   <script>
     // --------------------------------------------------------------------------
-    // 1. THREE.JS INTERACTIVE 3D DIGITAL SYSTEM CANVAS (Persistent Engine)
+    // A. SUBTLE AUDIO UI (Synthesized Web Audio API - Zero External Dependencies)
+    // --------------------------------------------------------------------------
+    let audioEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+          audioCtx = new AudioContext();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // High-tech luxury UI sounds
+    const soundUI = {
+      hover: function() {
+        if (!audioEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(2400, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(3200, ctx.currentTime + 0.035);
+          gain.gain.setValueAtTime(0.012, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.035);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.035);
+        } catch (err) {}
+      },
+      click: function() {
+        if (!audioEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(800, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(450, ctx.currentTime + 0.06);
+          gain.gain.setValueAtTime(0.04, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.06);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.06);
+        } catch (err) {}
+      },
+      flip: function() {
+        if (!audioEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(420, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.035, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.12);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.12);
+        } catch (err) {}
+      },
+      success: function() {
+        if (!audioEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.07);
+            gain.gain.setValueAtTime(0.025, ctx.currentTime + i * 0.07);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.07 + 0.18);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime + i * 0.07);
+            osc.stop(ctx.currentTime + i * 0.07 + 0.18);
+          });
+        } catch (err) {}
+      }
+    };
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      const text = document.getElementById('audioText');
+      const mobileText = document.getElementById('mobileAudioText');
+      const icon = document.getElementById('audioIcon');
+      
+      const label = audioEnabled ? 'AUDIO: ON' : 'AUDIO: OFF';
+      if (text) text.innerText = label;
+      if (mobileText) mobileText.innerText = label;
+      
+      if (icon) {
+        if (audioEnabled) {
+          icon.className = 'fa-solid fa-volume-high text-xs text-brand-gold';
+          soundUI.click();
+        } else {
+          icon.className = 'fa-solid fa-volume-xmark text-xs text-brand-muted';
+        }
+      }
+    }
+
+    // Attach sound feedback to primary interactive elements
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('button, a, .flip-card, .system-node-card').forEach(el => {
+        el.addEventListener('mouseenter', () => soundUI.hover(), { passive: true });
+        el.addEventListener('click', () => {
+          if (el.classList.contains('flip-card')) {
+            soundUI.flip();
+          } else {
+            soundUI.click();
+          }
+        }, { passive: true });
+      });
+    });
+
+    // --------------------------------------------------------------------------
+    // B. INTERACTIVE DOT MATRIX CANVAS (High-Tech Responsive Particle Grid)
+    // --------------------------------------------------------------------------
+    (function initDotMatrix() {
+      const canvas = document.getElementById('dotMatrixCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      const spacing = 38; // Clean spacing between matrix points
+      let mouseX = -1000;
+      let mouseY = -1000;
+      let targetMouseX = -1000;
+      let targetMouseY = -1000;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }, { passive: true });
+
+      window.addEventListener('mousemove', (e) => {
+        targetMouseX = e.clientX;
+        targetMouseY = e.clientY;
+      }, { passive: true });
+
+      function renderMatrix() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Smooth mouse dampening
+        mouseX += (targetMouseX - mouseX) * 0.12;
+        mouseY += (targetMouseY - mouseY) * 0.12;
+
+        const maxDist = 140; // Proximity radius for gold illumination
+        const baseRadius = 0.85;
+
+        for (let x = spacing / 2; x < width; x += spacing) {
+          for (let y = spacing / 2; y < height; y += spacing) {
+            const dx = mouseX - x;
+            const dy = mouseY - y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < maxDist) {
+              const ratio = 1 - (dist / maxDist);
+              const radius = baseRadius + (ratio * 1.8);
+              ctx.beginPath();
+              ctx.arc(x, y, radius, 0, Math.PI * 2);
+              // Illuminates to metallic gold near cursor
+              ctx.fillStyle = `rgba(212, 175, 55, ${0.12 + ratio * 0.65})`;
+              ctx.fill();
+            } else {
+              // Minimal subtle base dots
+              ctx.beginPath();
+              ctx.arc(x, y, baseRadius, 0, Math.PI * 2);
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.055)';
+              ctx.fill();
+            }
+          }
+        }
+        requestAnimationFrame(renderMatrix);
+      }
+      renderMatrix();
+    })();
+
+    // --------------------------------------------------------------------------
+    // C. THREE.JS INTERACTIVE 3D DIGITAL SYSTEM CANVAS (Persistent Engine)
     // --------------------------------------------------------------------------
     (function initHero3D() {
       const canvas = document.getElementById('hero-3d-canvas');
@@ -1813,7 +2006,6 @@
       }
       nodesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-      // Gold Glow Particle Shader Material
       const pMaterial = new THREE.PointsMaterial({
         color: 0xD4AF37,
         size: window.innerWidth < 768 ? 2.2 : 3.0,
@@ -1824,7 +2016,6 @@
       const particleSystem = new THREE.Points(nodesGeometry, pMaterial);
       scene.add(particleSystem);
 
-      // 3D Connected Wireframe Geometry (Representing System Pipeline Flow)
       const linesMaterial = new THREE.LineBasicMaterial({
         color: 0xC5A059,
         transparent: true,
@@ -1834,7 +2025,6 @@
       const linesMesh = new THREE.LineSegments(new THREE.BufferGeometry(), linesMaterial);
       scene.add(linesMesh);
 
-      // Central Digital Orb (Abstract Core Engine)
       const coreGeo = new THREE.IcosahedronGeometry(18, 1);
       const coreMat = new THREE.MeshBasicMaterial({
         color: 0xD4AF37,
@@ -1846,12 +2036,10 @@
       centralOrb.position.set(30, -5, -15);
       scene.add(centralOrb);
 
-      // Ambient Lighting for 3D Elements
       const pointLight = new THREE.PointLight(0xF3E5AB, 1.2, 200);
       pointLight.position.set(20, 20, 40);
       scene.add(pointLight);
 
-      // Mouse-follow interaction parameters
       let mouseX = 0;
       let mouseY = 0;
       let targetX = 0;
@@ -1862,14 +2050,12 @@
         mouseY = (e.clientY - window.innerHeight / 2) * 0.0006;
       }, { passive: true });
 
-      // Resize Handler
       window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
       }, { passive: true });
 
-      // Smooth Persistence Handling on Scroll
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         const heroHeight = document.getElementById('hero')?.offsetHeight || 800;
@@ -1884,7 +2070,6 @@
         }
       }, { passive: true });
 
-      // Smooth Animation Loop
       function animate3D() {
         requestAnimationFrame(animate3D);
 
@@ -1935,7 +2120,7 @@
     })();
 
     // --------------------------------------------------------------------------
-    // 2. PARALLAX 3D PERSPECTIVE CARD ROTATION IN HERO
+    // D. PARALLAX 3D PERSPECTIVE CARD ROTATION IN HERO
     // --------------------------------------------------------------------------
     const heroCard = document.getElementById('heroInteractiveCard');
     if (heroCard && window.innerWidth > 1024) {
@@ -1950,6 +2135,7 @@
     }
 
     function pulseNode(el) {
+      soundUI.click();
       el.classList.add('border-brand-gold', 'scale-[1.02]');
       setTimeout(() => {
         el.classList.remove('scale-[1.02]');
@@ -1957,10 +2143,12 @@
     }
 
     function toggleCardFlip(card) {
+      soundUI.flip();
       card.classList.toggle('is-flipped');
     }
 
     function toggleNodeDetails(card) {
+      soundUI.click();
       const detail = card.querySelector('.node-expanded-info');
       if (detail) {
         detail.classList.toggle('hidden');
@@ -1969,10 +2157,7 @@
     }
 
     // --------------------------------------------------------------------------
-    // 3. BIDIRECTIONAL SCROLL-BASED OUTSIDE ↔ INSIDE ANIMATION ENGINE
-    // Automatically triggers:
-    // Scroll DOWN -> Elements animate from OUTSIDE to INSIDE (designated location)
-    // Scroll UP -> Elements retreat from INSIDE to OUTSIDE
+    // E. BIDIRECTIONAL SCROLL-BASED OUTSIDE ↔ INSIDE ANIMATION ENGINE
     // --------------------------------------------------------------------------
     (function initDynamicScrollEngine() {
       const elements = document.querySelectorAll('.scroll-dynamic');
@@ -1981,7 +2166,6 @@
       let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
       let scrollDirection = 'down';
 
-      // Check on each frame/tick for ultra-smooth responsiveness
       function checkScrollPositions() {
         const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
         scrollDirection = currentScrollY >= lastScrollY ? 'down' : 'up';
@@ -1991,20 +2175,15 @@
 
         elements.forEach(el => {
           const rect = el.getBoundingClientRect();
-          
-          // Triggers entrance when top enters bottom 88% of screen
-          // Triggers exit when element moves out of view either way
           const inViewZone = (rect.top <= viewportHeight * 0.88) && (rect.bottom >= viewportHeight * 0.08);
 
           if (scrollDirection === 'down') {
             if (inViewZone) {
               el.classList.add('is-inside');
             } else if (rect.top > viewportHeight) {
-              // Element is below viewport while scrolling down
               el.classList.remove('is-inside');
             }
           } else {
-            // SCROLLING UP: Reverse back to OUTSIDE when scrolled past
             if (rect.top > viewportHeight * 0.86) {
               el.classList.remove('is-inside');
             } else if (inViewZone) {
@@ -2014,7 +2193,6 @@
         });
       }
 
-      // Initial pass to render hero & visible top elements
       window.addEventListener('DOMContentLoaded', checkScrollPositions);
       window.addEventListener('load', checkScrollPositions);
       window.addEventListener('scroll', checkScrollPositions, { passive: true });
@@ -2023,13 +2201,14 @@
     })();
 
     // --------------------------------------------------------------------------
-    // 4. INQUIRY MODAL POPUP LOGIC
+    // F. INQUIRY MODAL POPUP LOGIC
     // --------------------------------------------------------------------------
     const inquiryModal = document.getElementById('inquiryModal');
     const modalContent = document.getElementById('inquiryModalContent');
     const modalScope = document.getElementById('mScope');
 
     function openInquiryModal(defaultScope) {
+      soundUI.click();
       if (defaultScope && modalScope) {
         modalScope.value = defaultScope;
       }
@@ -2041,6 +2220,7 @@
     }
 
     function closeInquiryModal() {
+      soundUI.click();
       modalContent.classList.remove('scale-100');
       modalContent.classList.add('scale-95');
       setTimeout(() => {
@@ -2054,6 +2234,7 @@
 
     function handleModalSubmit(e) {
       e.preventDefault();
+      soundUI.click();
       const submitBtn = document.getElementById('mSubmitBtn');
       const alertBox = document.getElementById('mSuccessAlert');
       
@@ -2061,6 +2242,7 @@
       submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Syncing With Server...';
 
       setTimeout(() => {
+        soundUI.success();
         submitBtn.classList.add('hidden');
         alertBox.classList.remove('hidden');
         setTimeout(() => {
@@ -2075,7 +2257,7 @@
     }
 
     // --------------------------------------------------------------------------
-    // 5. EXIT-INTENT / ENGAGEMENT POPUP LOGIC
+    // G. EXIT-INTENT / ENGAGEMENT POPUP LOGIC
     // --------------------------------------------------------------------------
     const exitPopup = document.getElementById('exitIntentPopup');
     let popupShown = false;
@@ -2083,11 +2265,13 @@
     function showExitPopup() {
       if (popupShown) return;
       popupShown = true;
+      soundUI.hover();
       exitPopup.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
       exitPopup.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
     }
 
     function dismissExitPopup() {
+      soundUI.click();
       exitPopup.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
       exitPopup.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
     }
@@ -2098,7 +2282,7 @@
     setTimeout(showExitPopup, 26000);
 
     // --------------------------------------------------------------------------
-    // 6. LIVE NOTIFICATION TOAST POPUP
+    // H. LIVE NOTIFICATION TOAST POPUP
     // --------------------------------------------------------------------------
     const liveToast = document.getElementById('liveToast');
     setTimeout(() => {
@@ -2109,10 +2293,11 @@
     }, 4500);
 
     // --------------------------------------------------------------------------
-    // 7. CONTACT SECTION FORM HANDLER
+    // I. CONTACT SECTION FORM HANDLER
     // --------------------------------------------------------------------------
     function handleFormSubmit(e) {
       if (e) e.preventDefault();
+      soundUI.click();
       const btn = document.getElementById('submitBtn');
       const successBox = document.getElementById('formSuccess');
       
@@ -2120,6 +2305,7 @@
       btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Transmitting System Brief...';
       
       setTimeout(() => {
+        soundUI.success();
         btn.classList.add('hidden');
         successBox.classList.remove('hidden');
         document.getElementById('contactForm').reset();
@@ -2127,7 +2313,7 @@
     }
 
     // --------------------------------------------------------------------------
-    // 8. MOBILE NAVIGATION DRAWER TOGGLE
+    // J. MOBILE NAVIGATION DRAWER TOGGLE
     // --------------------------------------------------------------------------
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -2136,6 +2322,7 @@
 
     if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.addEventListener('click', () => {
+        soundUI.click();
         const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
         mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
         mobileMenu.classList.toggle('hidden');
@@ -2159,7 +2346,7 @@
     }
 
     // --------------------------------------------------------------------------
-    // 9. HEADER SCROLL ELEVATION EFFECT
+    // K. HEADER SCROLL ELEVATION EFFECT
     // --------------------------------------------------------------------------
     const header = document.getElementById('mainHeader');
     window.addEventListener('scroll', () => {
