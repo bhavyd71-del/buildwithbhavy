@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AURA DIGITAL SYSTEMS | High-Converting Websites, AI Systems & Automation</title>
+  <title>BuildWithBhavyee | High-Converting Websites, AI Systems & Automation</title>
   <meta name="description" content="We engineer digital systems that drive measurable business growth. High-converting websites, sales funnels, AI workflows, and automated customer journeys.">
-  <meta name="keywords" content="digital systems, sales funnels, AI business automation, conversion rate optimization, enterprise landing pages, WhatsApp automation">
+  <meta name="keywords" content="digital systems, sales funnels, AI business automation, conversion rate optimization, enterprise landing pages, WhatsApp automation, BuildWithBhavyee">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://auradigitalsystems.com/">
+  <link rel="canonical" href="https://buildwithbhavyee.com/">
 
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://auradigitalsystems.com/">
-  <meta property="og:title" content="AURA DIGITAL SYSTEMS | Growth Systems & AI Automation">
+  <meta property="og:url" content="https://buildwithbhavyee.com/">
+  <meta property="og:title" content="BuildWithBhavyee | Growth Systems & AI Automation">
   <meta property="og:description" content="Engineering unified digital architectures that transform traffic into scalable enterprise revenue.">
   <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80">
 
@@ -21,6 +21,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Three.js CDN for Real Interactive 3D Canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -50,9 +53,9 @@
             mono: ['"Space Grotesk"', 'monospace']
           },
           boxShadow: {
-            'gold-glow': '0 0 45px -10px rgba(212, 175, 55, 0.22)',
-            'gold-sm': '0 0 20px -5px rgba(212, 175, 55, 0.3)',
-            'card-depth': '0 20px 40px -15px rgba(0,0,0,0.8), 0 0 1px 1px rgba(255,255,255,0.05)'
+            'gold-glow': '0 0 45px -10px rgba(212, 175, 55, 0.25)',
+            'gold-sm': '0 0 20px -5px rgba(212, 175, 55, 0.35)',
+            'card-depth': '0 20px 40px -15px rgba(0,0,0,0.85), 0 0 1px 1px rgba(255,255,255,0.06)'
           }
         }
       }
@@ -76,7 +79,6 @@
       overflow-x: hidden;
     }
     
-    /* Fine subtle noise & grid */
     .bg-grid-pattern {
       background-size: 40px 40px;
       background-image: 
@@ -92,15 +94,49 @@
       border-image: linear-gradient(to bottom right, rgba(212, 175, 55, 0.45), rgba(255, 255, 255, 0.05)) 1;
     }
 
-    /* 3D Perspective Container */
+    /* 3D Perspective & Hardware Acceleration */
     .perspective-1000 {
       perspective: 1000px;
+      -webkit-perspective: 1000px;
     }
     .preserve-3d {
       transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
     }
     .backface-hidden {
       backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    /* Flip-Flop Card Interaction Styles */
+    .flip-card {
+      perspective: 1200px;
+      min-height: 380px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner,
+    .flip-card.is-flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      top: 0;
+      left: 0;
+      border-radius: 0.75rem;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
     }
 
     /* Smooth Custom Scrollbar */
@@ -137,11 +173,37 @@
       animation: orbFloat 14s ease-in-out infinite alternate;
     }
 
+    /* Scroll Reveal & Micro-motion */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-item.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Live Toast Notification animation */
+    @keyframes toastSlide {
+      0% { transform: translateX(120%); opacity: 0; }
+      15% { transform: translateX(0); opacity: 1; }
+      85% { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(120%); opacity: 0; }
+    }
+    .animate-toast {
+      animation: toastSlide 7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .animate-pipeline, .ambient-orb, .scroll-smooth {
+      .animate-pipeline, .ambient-orb, .scroll-smooth, .flip-card-inner {
         animation: none !important;
         transition: none !important;
         scroll-behavior: auto !important;
+      }
+      .flip-card:hover .flip-card-inner {
+        transform: none !important;
       }
     }
   </style>
@@ -153,21 +215,24 @@
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://auradigitalsystems.com/#organization",
-        "name": "AURA Digital Systems",
-        "url": "https://auradigitalsystems.com",
-        "logo": "https://auradigitalsystems.com/assets/logo.png",
+        "@id": "https://buildwithbhavyee.com/#organization",
+        "name": "BuildWithBhavyee",
+        "url": "https://buildwithbhavyee.com",
+        "email": "bhavydetroja0234@gmail.com",
+        "telephone": "+917623954045",
         "description": "Enterprise digital systems architecture, AI workflows, and high-conversion infrastructure.",
         "contactPoint": {
           "@type": "ContactPoint",
+          "telephone": "+917623954045",
           "contactType": "Sales and Project Strategy",
-          "availableLanguage": ["English"]
+          "email": "bhavydetroja0234@gmail.com",
+          "availableLanguage": ["English", "Hindi", "Gujarati"]
         }
       },
       {
         "@type": "Service",
         "name": "Digital Systems & Conversion Infrastructure",
-        "provider": { "@id": "https://auradigitalsystems.com/#organization" },
+        "provider": { "@id": "https://buildwithbhavyee.com/#organization" },
         "serviceType": "Digital Systems Development",
         "description": "Full-stack conversion systems, business automation, AI workflows, and structured sales funnels."
       }
@@ -188,8 +253,8 @@
   <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl bg-brand-void/80 border-b border-brand-border/60" id="mainHeader">
     <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
       
-      <!-- Brand Identity -->
-      <a href="#hero" class="flex items-center gap-3.5 group focus:outline-none focus:ring-1 focus:ring-brand-gold" aria-label="AURA Digital Systems Home">
+      <!-- Brand Identity: BuildWithBhavyee -->
+      <a href="#hero" class="flex items-center gap-3.5 group focus:outline-none focus:ring-1 focus:ring-brand-gold" aria-label="BuildWithBhavyee Home">
         <div class="w-10 h-10 rounded-lg bg-brand-surface border border-brand-borderLight flex items-center justify-center relative overflow-hidden group-hover:border-brand-gold/60 transition-colors">
           <div class="absolute inset-0 bg-gradient-to-tr from-brand-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <svg class="w-5 h-5 text-brand-gold transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -199,7 +264,7 @@
           </svg>
         </div>
         <div class="flex flex-col">
-          <span class="font-mono text-sm tracking-[0.25em] text-white font-bold uppercase">AURA</span>
+          <span class="font-mono text-sm tracking-[0.2em] text-white font-bold uppercase">BuildWithBhavyee</span>
           <span class="text-[10px] tracking-[0.15em] text-brand-muted uppercase font-medium">Digital Systems</span>
         </div>
       </a>
@@ -214,11 +279,15 @@
         <a href="#contact" class="hover:text-white transition-colors duration-200">Contact</a>
       </nav>
 
-      <!-- Action Button Desktop -->
+      <!-- Action Buttons Desktop -->
       <div class="hidden md:flex items-center gap-4">
-        <a href="#contact" class="relative inline-flex items-center justify-center px-6 py-2.5 text-xs font-mono uppercase tracking-wider font-semibold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-sm hover:shadow-gold-glow hover:brightness-110 transition-all duration-300">
-          Start a Project
+        <a href="https://wa.me/917623954045?text=Hello%20BuildWithBhavyee,%20I%20am%20interested%20in%20building%20a%20digital%20system." target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded border border-emerald-500/20 bg-emerald-500/5" title="Direct WhatsApp Support">
+          <i class="fa-brands fa-whatsapp text-sm"></i>
+          <span>+91 7623954045</span>
         </a>
+        <button onclick="openInquiryModal()" class="relative inline-flex items-center justify-center px-6 py-2.5 text-xs font-mono uppercase tracking-wider font-semibold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-sm hover:shadow-gold-glow hover:brightness-110 transition-all duration-300 cursor-pointer">
+          Start a Project
+        </button>
       </div>
 
       <!-- Mobile Hamburger Button -->
@@ -237,10 +306,13 @@
         <a href="#about" class="mobile-nav-link text-brand-muted hover:text-white py-1 transition-colors">About</a>
         <a href="#contact" class="mobile-nav-link text-brand-muted hover:text-white py-1 transition-colors">Contact</a>
       </nav>
-      <div class="pt-4 border-t border-brand-border">
-        <a href="#contact" class="mobile-nav-link block text-center w-full py-3 text-xs font-mono tracking-wider font-semibold uppercase text-brand-void bg-brand-gold rounded-sm shadow-gold-sm">
-          Start a Project
+      <div class="pt-4 border-t border-brand-border space-y-3">
+        <a href="https://wa.me/917623954045?text=Hello%20BuildWithBhavyee,%20I%20am%20interested%20in%20building%20a%20digital%20system." target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-sm">
+          <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp +91 7623954045
         </a>
+        <button onclick="openInquiryModal()" class="mobile-nav-link block text-center w-full py-3 text-xs font-mono tracking-wider font-semibold uppercase text-brand-void bg-brand-gold rounded-sm shadow-gold-sm">
+          Start a Project
+        </button>
       </div>
     </div>
   </header>
@@ -248,13 +320,17 @@
   <main>
     <!-- HERO SECTION -->
     <section id="hero" class="relative min-h-screen pt-32 pb-20 md:pt-40 md:pb-28 flex items-center bg-grid-pattern overflow-hidden">
-      <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+      
+      <!-- REAL 3D Three.js WebGL Interactive Background Canvas -->
+      <canvas id="hero-3d-canvas" class="absolute inset-0 w-full h-full pointer-events-auto opacity-75 z-0"></canvas>
+
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10 pointer-events-none">
         
         <!-- Left Content Column -->
-        <div class="lg:col-span-7 flex flex-col items-start space-y-6 md:space-y-8">
+        <div class="lg:col-span-7 flex flex-col items-start space-y-6 md:space-y-8 pointer-events-auto reveal-item">
           
           <!-- System Eyebrow Badge -->
-          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-surface border border-brand-border text-xs font-mono tracking-widest text-brand-gold uppercase">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-surface/90 border border-brand-border text-xs font-mono tracking-widest text-brand-gold uppercase backdrop-blur-md">
             <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
             DIGITAL SYSTEMS • AI • AUTOMATION • CONVERSION
           </div>
@@ -266,16 +342,16 @@
 
           <!-- Supporting Copy -->
           <p class="text-base sm:text-lg text-brand-muted max-w-2xl font-normal leading-relaxed">
-            We engineer websites, structured funnels, AI-powered workflows, and business automation systems that turn raw attention into qualified leads, pipeline velocity, and predictable enterprise revenue.
+            We engineer websites, structured funnels, AI-powered workflows, and business automation systems that turn raw attention into qualified leads, pipeline velocity, and predictable enterprise revenue with <span class="text-white font-medium">BuildWithBhavyee</span>.
           </p>
 
           <!-- CTAs -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2">
-            <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-bold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-glow hover:brightness-110 transition-all duration-300">
+            <button onclick="openInquiryModal()" class="inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-bold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-glow hover:brightness-110 transition-all duration-300 cursor-pointer">
               Build Your System
               <i class="fa-solid fa-arrow-right ml-3 text-xs"></i>
-            </a>
-            <a href="#work" class="inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-semibold text-brand-offwhite bg-brand-surface/70 border border-brand-border hover:border-brand-gold/60 hover:bg-brand-surfaceLight transition-all duration-200">
+            </button>
+            <a href="#work" class="inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-semibold text-brand-offwhite bg-brand-surface/80 backdrop-blur-md border border-brand-border hover:border-brand-gold/60 hover:bg-brand-surfaceLight transition-all duration-200">
               View Our Work
             </a>
           </div>
@@ -297,9 +373,9 @@
           </div>
         </div>
 
-        <!-- Right Visual Column: 3D System Pipeline Matrix -->
-        <div class="lg:col-span-5 relative perspective-1000">
-          <div class="relative w-full rounded-2xl bg-gradient-to-b from-brand-surfaceLight/80 to-brand-surface/90 border border-brand-borderLight p-6 shadow-card-depth backdrop-blur-md transition-transform duration-500 hover:rotate-1">
+        <!-- Right Visual Column: Interactive 3D System Pipeline Matrix with 3D Depth Card -->
+        <div class="lg:col-span-5 relative perspective-1000 pointer-events-auto reveal-item" id="heroInteractiveCard">
+          <div class="relative w-full rounded-2xl bg-gradient-to-b from-brand-surfaceLight/90 to-brand-surface/95 border border-brand-borderLight p-6 shadow-card-depth backdrop-blur-xl transition-all duration-300 hover:border-brand-gold/40">
             
             <!-- Terminal Header -->
             <div class="flex items-center justify-between pb-4 border-b border-brand-border/60">
@@ -307,80 +383,81 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
                 <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-                <span class="text-[11px] font-mono tracking-wider text-brand-muted ml-2">SYSTEM_TOPOLOGY_v4.2</span>
+                <span class="text-[11px] font-mono tracking-wider text-brand-muted ml-2">SYSTEM_TOPOLOGY_v4.8</span>
               </div>
-              <div class="text-[10px] font-mono px-2 py-0.5 bg-brand-gold/10 text-brand-gold border border-brand-gold/20 rounded">
-                STATUS: ACTIVE
+              <div class="text-[10px] font-mono px-2 py-0.5 bg-brand-gold/10 text-brand-gold border border-brand-gold/20 rounded flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                ACTIVE PIPELINE
               </div>
             </div>
 
-            <!-- Visual Flow Stages -->
-            <div class="py-6 space-y-3 relative">
+            <!-- Dynamic System Interactive Nodes Preview -->
+            <div class="py-5 space-y-3 relative">
               
-              <!-- Subtle vertical line through stages -->
-              <div class="absolute left-6 top-7 bottom-7 w-[2px] bg-gradient-to-b from-brand-gold via-brand-border to-brand-gold/40"></div>
+              <!-- Central connecting line -->
+              <div class="absolute left-6 top-6 bottom-6 w-[2px] bg-gradient-to-b from-brand-gold via-brand-borderLight to-brand-gold/40"></div>
 
-              <!-- Stage 1 -->
-              <div class="flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-border hover:border-brand-gold/40 transition-all relative z-10 group">
+              <!-- Interactive Node 1 -->
+              <div class="hero-node-item flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-border hover:border-brand-gold/50 transition-all cursor-pointer group" onclick="pulseNode(this)">
                 <div class="flex items-center gap-3.5">
-                  <div class="w-7 h-7 rounded-md bg-brand-void border border-brand-border flex items-center justify-center text-xs text-brand-gold group-hover:scale-105 transition-transform">
+                  <div class="w-7 h-7 rounded-md bg-brand-void border border-brand-border flex items-center justify-center text-xs text-brand-gold group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-users text-[11px]"></i>
                   </div>
                   <div>
-                    <div class="text-xs font-semibold text-white">Targeted Traffic</div>
-                    <div class="text-[10px] text-brand-muted">Search, Ads, Direct Channels</div>
+                    <div class="text-xs font-semibold text-white group-hover:text-brand-goldLight transition-colors">Visitor / Targeted Traffic</div>
+                    <div class="text-[10px] text-brand-muted">Search, Meta Ads, Inbound Nodes</div>
                   </div>
                 </div>
                 <span class="text-[10px] font-mono text-brand-gold/80 bg-brand-void px-2 py-0.5 rounded border border-brand-border">Node 01</span>
               </div>
 
-              <!-- Stage 2 -->
-              <div class="flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-border hover:border-brand-gold/40 transition-all relative z-10 group">
+              <!-- Interactive Node 2 -->
+              <div class="hero-node-item flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-border hover:border-brand-gold/50 transition-all cursor-pointer group" onclick="pulseNode(this)">
                 <div class="flex items-center gap-3.5">
-                  <div class="w-7 h-7 rounded-md bg-brand-void border border-brand-border flex items-center justify-center text-xs text-brand-gold group-hover:scale-105 transition-transform">
+                  <div class="w-7 h-7 rounded-md bg-brand-void border border-brand-border flex items-center justify-center text-xs text-brand-gold group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-layer-group text-[11px]"></i>
                   </div>
                   <div>
-                    <div class="text-xs font-semibold text-white">Conversion Architecture</div>
-                    <div class="text-[10px] text-brand-muted">High-Intent Landing Interface</div>
+                    <div class="text-xs font-semibold text-white group-hover:text-brand-goldLight transition-colors">High-Intent Website / Landing</div>
+                    <div class="text-[10px] text-brand-muted">Zero-friction conversion interface</div>
                   </div>
                 </div>
                 <span class="text-[10px] font-mono text-brand-gold/80 bg-brand-void px-2 py-0.5 rounded border border-brand-border">Node 02</span>
               </div>
 
-              <!-- Stage 3 -->
-              <div class="flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-border hover:border-brand-gold/40 transition-all relative z-10 group">
+              <!-- Interactive Node 3 -->
+              <div class="hero-node-item flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-border hover:border-brand-gold/50 transition-all cursor-pointer group" onclick="pulseNode(this)">
                 <div class="flex items-center gap-3.5">
-                  <div class="w-7 h-7 rounded-md bg-brand-void border border-brand-border flex items-center justify-center text-xs text-brand-gold group-hover:scale-105 transition-transform">
-                    <i class="fa-brands fa-whatsapp text-[12px]"></i>
+                  <div class="w-7 h-7 rounded-md bg-brand-void border border-brand-border flex items-center justify-center text-xs text-brand-gold group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-whatsapp text-[12px] text-emerald-400"></i>
                   </div>
                   <div>
-                    <div class="text-xs font-semibold text-white">Automated Engagement</div>
-                    <div class="text-[10px] text-brand-muted">Instant WhatsApp & CRM Sync</div>
+                    <div class="text-xs font-semibold text-white group-hover:text-brand-goldLight transition-colors">Instant WhatsApp + CRM Sync</div>
+                    <div class="text-[10px] text-brand-muted">Lead qualified & notified in &lt;60s</div>
                   </div>
                 </div>
-                <span class="text-[10px] font-mono text-emerald-400/90 bg-brand-void px-2 py-0.5 rounded border border-brand-border">Instant</span>
+                <span class="text-[10px] font-mono text-emerald-400 bg-brand-void px-2 py-0.5 rounded border border-brand-border">Auto</span>
               </div>
 
-              <!-- Stage 4 -->
-              <div class="flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-gold/30 shadow-gold-sm relative z-10 group">
+              <!-- Interactive Node 4 -->
+              <div class="hero-node-item flex items-center justify-between p-3 rounded-lg bg-brand-surface/90 border border-brand-gold/40 shadow-gold-sm cursor-pointer group" onclick="pulseNode(this)">
                 <div class="flex items-center gap-3.5">
-                  <div class="w-7 h-7 rounded-md bg-brand-gold text-brand-void flex items-center justify-center text-xs font-bold">
-                    <i class="fa-solid fa-chart-line text-[11px]"></i>
+                  <div class="w-7 h-7 rounded-md bg-brand-gold text-brand-void flex items-center justify-center text-xs font-bold group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-credit-card text-[11px]"></i>
                   </div>
                   <div>
-                    <div class="text-xs font-semibold text-white">Commercial Conversion</div>
-                    <div class="text-[10px] text-brand-goldLight">Monetized Client Acquisition</div>
+                    <div class="text-xs font-semibold text-white">Dynamic Offer & Settlement</div>
+                    <div class="text-[10px] text-brand-goldLight">Monetized client conversion completed</div>
                   </div>
                 </div>
                 <span class="text-[10px] font-mono text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded border border-brand-gold/30">Target</span>
               </div>
             </div>
 
-            <!-- Footer metric bar -->
+            <!-- Footer metric bar with interactive 3D particle toggle hint -->
             <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] font-mono text-brand-muted">
-              <span>PIPELINE HEALTH: OPTIMAL</span>
-              <span class="text-brand-gold">EFFICIENCY: +100%</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-cube text-brand-gold text-[10px]"></i> 3D MESH ACTIVE</span>
+              <span class="text-brand-gold">MOVE CURSOR TO ROTATE</span>
             </div>
           </div>
         </div>
@@ -388,123 +465,273 @@
       </div>
     </section>
 
-    <!-- CORE CAPABILITIES (SERVICES) SECTION -->
+    <!-- CORE CAPABILITIES (SERVICES) SECTION WITH FLIP-FLOP CARDS -->
     <section id="services" class="py-24 md:py-32 bg-brand-surface/30 border-t border-brand-border relative">
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         
         <!-- Section Header -->
-        <div class="max-w-3xl mb-16 md:mb-20">
+        <div class="max-w-3xl mb-16 md:mb-20 reveal-item">
           <div class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-3">SYSTEM CAPABILITIES</div>
           <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white mb-5">
             Engineered For Frictionless Performance.
           </h2>
           <p class="text-base text-brand-muted leading-relaxed">
-            We eliminate fragmented touchpoints. Every component is designed, tested, and integrated into a single high-efficiency business infrastructure.
+            We eliminate fragmented touchpoints. Hover over or tap any capability below to flip the card and reveal the engineered execution roadmap.
           </p>
         </div>
 
-        <!-- 6 Core Services Grid -->
+        <!-- 6 Core Services Grid featuring 3D FLIP-FLOP cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           
-          <!-- Card 1 -->
-          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
-            <div>
-              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
-                <i class="fa-solid fa-desktop text-lg"></i>
+          <!-- Flip Card 1: Websites -->
+          <div class="flip-card reveal-item" onclick="this.classList.toggle('is-flipped')">
+            <div class="flip-card-inner">
+              <!-- Front -->
+              <div class="flip-card-front p-8 bg-brand-surface border border-brand-border hover:border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6">
+                    <i class="fa-solid fa-desktop text-lg"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-white mb-3">High-Converting Websites</h3>
+                  <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                    Editorial, high-speed web platforms engineered around your primary commercial objectives. Fast, responsive, accessible, and structured to convert attention into action.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+                  <span>Hover to Flip &rarr;</span>
+                  <i class="fa-solid fa-rotate text-xs"></i>
+                </div>
               </div>
-              <h3 class="text-xl font-bold text-white mb-3">High-Converting Websites</h3>
-              <p class="text-sm text-brand-muted leading-relaxed mb-6">
-                Editorial, high-speed web platforms engineered around your primary commercial objectives. Fast, responsive, accessible, and structured to convert attention into action.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
-              <span>Conversion-First UX</span>
-              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+              <!-- Back -->
+              <div class="flip-card-back p-8 bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="text-xs font-mono text-brand-gold uppercase tracking-widest mb-3">CONVERSION BLUEPRINT</div>
+                  <h4 class="text-lg font-bold text-white mb-3">Turn Visitors Into Lifetime Customers</h4>
+                  <p class="text-xs text-brand-offwhite/90 leading-relaxed mb-4">
+                    Sub-second load speeds, strategic cognitive framing, high-retention typography, and frictionless response funnels.
+                  </p>
+                  <ul class="text-xs text-brand-muted space-y-1.5 font-mono">
+                    <li>• Dynamic Mobile Responsive</li>
+                    <li>• SEO & Structured Metadata</li>
+                    <li>• Direct WhatsApp Ingestion</li>
+                  </ul>
+                </div>
+                <div class="pt-4 border-t border-brand-border/60">
+                  <button onclick="event.stopPropagation(); openInquiryModal('High-Converting Website')" class="w-full py-2.5 text-xs font-mono uppercase tracking-wider font-semibold text-brand-void bg-brand-gold rounded hover:brightness-110 transition-all">
+                    Explore Service
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Card 2 -->
-          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
-            <div>
-              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
-                <i class="fa-solid fa-crosshairs text-lg"></i>
+          <!-- Flip Card 2: Landing Pages -->
+          <div class="flip-card reveal-item" onclick="this.classList.toggle('is-flipped')">
+            <div class="flip-card-inner">
+              <!-- Front -->
+              <div class="flip-card-front p-8 bg-brand-surface border border-brand-border hover:border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6">
+                    <i class="fa-solid fa-crosshairs text-lg"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-white mb-3">Targeted Landing Pages</h3>
+                  <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                    Single-purpose landing pages built to maximize acquisition efficiency. Uncompromising messaging hierarchy, zero distraction, and direct value proposition articulation.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+                  <span>Hover to Flip &rarr;</span>
+                  <i class="fa-solid fa-rotate text-xs"></i>
+                </div>
               </div>
-              <h3 class="text-xl font-bold text-white mb-3">Targeted Landing Pages</h3>
-              <p class="text-sm text-brand-muted leading-relaxed mb-6">
-                Single-purpose landing pages built to maximize acquisition efficiency. Uncompromising messaging hierarchy, zero distraction, and direct value proposition articulation.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
-              <span>Frictionless Funnel</span>
-              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+              <!-- Back -->
+              <div class="flip-card-back p-8 bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="text-xs font-mono text-brand-gold uppercase tracking-widest mb-3">FUNNEL ACCELERATION</div>
+                  <h4 class="text-lg font-bold text-white mb-3">Singular Conversion Objective</h4>
+                  <p class="text-xs text-brand-offwhite/90 leading-relaxed mb-4">
+                    Eliminate choice paralysis. Direct traffic from Google & Meta campaigns directly into razor-sharp decision funnels.
+                  </p>
+                  <ul class="text-xs text-brand-muted space-y-1.5 font-mono">
+                    <li>• Rapid A/B Architecture</li>
+                    <li>• Psychological Objection Gates</li>
+                    <li>• Direct Form & WhatsApp Hooks</li>
+                  </ul>
+                </div>
+                <div class="pt-4 border-t border-brand-border/60">
+                  <button onclick="event.stopPropagation(); openInquiryModal('Targeted Landing Pages')" class="w-full py-2.5 text-xs font-mono uppercase tracking-wider font-semibold text-brand-void bg-brand-gold rounded hover:brightness-110 transition-all">
+                    Explore Service
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Card 3 -->
-          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
-            <div>
-              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
-                <i class="fa-solid fa-filter-circle-dollar text-lg"></i>
+          <!-- Flip Card 3: Sales Funnels -->
+          <div class="flip-card reveal-item" onclick="this.classList.toggle('is-flipped')">
+            <div class="flip-card-inner">
+              <!-- Front -->
+              <div class="flip-card-front p-8 bg-brand-surface border border-brand-border hover:border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6">
+                    <i class="fa-solid fa-filter-circle-dollar text-lg"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-white mb-3">Structured Sales Funnels</h3>
+                  <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                    Multi-step acquisition architectures that guide prospects through discovery, qualification, proposal, and checkout with quantifiable velocity.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+                  <span>Hover to Flip &rarr;</span>
+                  <i class="fa-solid fa-rotate text-xs"></i>
+                </div>
               </div>
-              <h3 class="text-xl font-bold text-white mb-3">Structured Sales Funnels</h3>
-              <p class="text-sm text-brand-muted leading-relaxed mb-6">
-                Multi-step acquisition architectures that guide prospects through discovery, qualification, proposal, and checkout with quantifiable velocity.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
-              <span>Automated Qualification</span>
-              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+              <!-- Back -->
+              <div class="flip-card-back p-8 bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="text-xs font-mono text-brand-gold uppercase tracking-widest mb-3">PIPELINE ARCHITECTURE</div>
+                  <h4 class="text-lg font-bold text-white mb-3">Systematic Inbound Closing</h4>
+                  <p class="text-xs text-brand-offwhite/90 leading-relaxed mb-4">
+                    Lead sorting algorithms, automated scheduling calendars, and integrated escrow/Stripe checkout experiences.
+                  </p>
+                  <ul class="text-xs text-brand-muted space-y-1.5 font-mono">
+                    <li>• Conditional Lead Qualification</li>
+                    <li>• Automated Nurture Sequences</li>
+                    <li>• High-Ticket Booking Flow</li>
+                  </ul>
+                </div>
+                <div class="pt-4 border-t border-brand-border/60">
+                  <button onclick="event.stopPropagation(); openInquiryModal('Sales Funnel Architecture')" class="w-full py-2.5 text-xs font-mono uppercase tracking-wider font-semibold text-brand-void bg-brand-gold rounded hover:brightness-110 transition-all">
+                    Explore Service
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Card 4 -->
-          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
-            <div>
-              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
-                <i class="fa-solid fa-microchip text-lg"></i>
+          <!-- Flip Card 4: AI Systems -->
+          <div class="flip-card reveal-item" onclick="this.classList.toggle('is-flipped')">
+            <div class="flip-card-inner">
+              <!-- Front -->
+              <div class="flip-card-front p-8 bg-brand-surface border border-brand-border hover:border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-white mb-3">AI Systems & Agents</h3>
+                  <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                    Autonomous AI agents and data extraction pipelines designed to qualify inquiries, draft proposals, categorize requirements, and eliminate internal drag.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+                  <span>Hover to Flip &rarr;</span>
+                  <i class="fa-solid fa-rotate text-xs"></i>
+                </div>
               </div>
-              <h3 class="text-xl font-bold text-white mb-3">AI Systems & Agents</h3>
-              <p class="text-sm text-brand-muted leading-relaxed mb-6">
-                Autonomous AI agents and data extraction pipelines designed to qualify inquiries, draft proposals, categorize requirements, and eliminate internal drag.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
-              <span>Operational Automation</span>
-              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+              <!-- Back -->
+              <div class="flip-card-back p-8 bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="text-xs font-mono text-brand-gold uppercase tracking-widest mb-3">COGNITIVE ENGINE</div>
+                  <h4 class="text-lg font-bold text-white mb-3">24/7 Intelligent Automation</h4>
+                  <p class="text-xs text-brand-offwhite/90 leading-relaxed mb-4">
+                    Deploy LLM logic to classify complex customer requests and generate immediate contextual responses.
+                  </p>
+                  <ul class="text-xs text-brand-muted space-y-1.5 font-mono">
+                    <li>• Smart Form Ingestion</li>
+                    <li>• Document & Proposal AI</li>
+                    <li>• Realtime WhatsApp AI Handlers</li>
+                  </ul>
+                </div>
+                <div class="pt-4 border-t border-brand-border/60">
+                  <button onclick="event.stopPropagation(); openInquiryModal('AI Systems & Agents')" class="w-full py-2.5 text-xs font-mono uppercase tracking-wider font-semibold text-brand-void bg-brand-gold rounded hover:brightness-110 transition-all">
+                    Explore Service
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Card 5 -->
-          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
-            <div>
-              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
-                <i class="fa-solid fa-bolt-lightning text-lg"></i>
+          <!-- Flip Card 5: Business Automation -->
+          <div class="flip-card reveal-item" onclick="this.classList.toggle('is-flipped')">
+            <div class="flip-card-inner">
+              <!-- Front -->
+              <div class="flip-card-front p-8 bg-brand-surface border border-brand-border hover:border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6">
+                    <i class="fa-solid fa-bolt-lightning text-lg"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-white mb-3">Business Automation</h3>
+                  <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                    Deep integrations across WhatsApp Business, CRMs, Stripe, webhooks, and client databases. Zero manual re-entry and immediate notifications for high-priority leads.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+                  <span>Hover to Flip &rarr;</span>
+                  <i class="fa-solid fa-rotate text-xs"></i>
+                </div>
               </div>
-              <h3 class="text-xl font-bold text-white mb-3">Business Automation</h3>
-              <p class="text-sm text-brand-muted leading-relaxed mb-6">
-                Deep integrations across WhatsApp Business, CRMs, Stripe, webhooks, and client databases. Zero manual re-entry and immediate notifications for high-priority leads.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
-              <span>CRM & Webhooks</span>
-              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+              <!-- Back -->
+              <div class="flip-card-back p-8 bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="text-xs font-mono text-brand-gold uppercase tracking-widest mb-3">ZERO MANUAL DRAG</div>
+                  <h4 class="text-lg font-bold text-white mb-3">Instant CRM & Alert Routing</h4>
+                  <p class="text-xs text-brand-offwhite/90 leading-relaxed mb-4">
+                    Eliminate spreadsheets. The moment an inquiry arrives, triggers fire across WhatsApp, Email, Slack, and your invoicing ledger.
+                  </p>
+                  <ul class="text-xs text-brand-muted space-y-1.5 font-mono">
+                    <li>• WhatsApp Cloud API Sync</li>
+                    <li>• Automated Invoice Triggers</li>
+                    <li>• Instant Owner Lead Alerts</li>
+                  </ul>
+                </div>
+                <div class="pt-4 border-t border-brand-border/60">
+                  <button onclick="event.stopPropagation(); openInquiryModal('Business Automation')" class="w-full py-2.5 text-xs font-mono uppercase tracking-wider font-semibold text-brand-void bg-brand-gold rounded hover:brightness-110 transition-all">
+                    Explore Service
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Card 6 -->
-          <div class="p-8 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-all duration-300 group hover:-translate-y-1 shadow-card-depth flex flex-col justify-between">
-            <div>
-              <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6 group-hover:border-brand-gold transition-colors">
-                <i class="fa-solid fa-arrows-split-up-and-left text-lg"></i>
+          <!-- Flip Card 6: Unified Conversion Systems -->
+          <div class="flip-card reveal-item" onclick="this.classList.toggle('is-flipped')">
+            <div class="flip-card-inner">
+              <!-- Front -->
+              <div class="flip-card-front p-8 bg-brand-surface border border-brand-border hover:border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="w-12 h-12 rounded-lg bg-brand-void border border-brand-borderLight flex items-center justify-center text-brand-gold mb-6">
+                    <i class="fa-solid fa-arrows-split-up-and-left text-lg"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-white mb-3">Unified Conversion Systems</h3>
+                  <p class="text-sm text-brand-muted leading-relaxed mb-6">
+                    The entire digital ecosystem synchronized: incoming search, positioning, instant WhatsApp follow-up sequences, and seamless payment collection tied together.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
+                  <span>Hover to Flip &rarr;</span>
+                  <i class="fa-solid fa-rotate text-xs"></i>
+                </div>
               </div>
-              <h3 class="text-xl font-bold text-white mb-3">Unified Conversion Systems</h3>
-              <p class="text-sm text-brand-muted leading-relaxed mb-6">
-                The entire digital ecosystem synchronized: incoming search, positioning, instant WhatsApp follow-up sequences, and seamless payment collection tied together.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-mono text-brand-gold/80">
-              <span>End-to-End Synergy</span>
-              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+              <!-- Back -->
+              <div class="flip-card-back p-8 bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/50 shadow-card-depth flex flex-col justify-between">
+                <div>
+                  <div class="text-xs font-mono text-brand-gold uppercase tracking-widest mb-3">END-TO-END MONOPOLY</div>
+                  <h4 class="text-lg font-bold text-white mb-3">The Complete Growth Machine</h4>
+                  <p class="text-xs text-brand-offwhite/90 leading-relaxed mb-4">
+                    Website + Landing Architecture + AI Followup + Instant WhatsApp Dispatch unified by <span class="text-white font-semibold">BuildWithBhavyee</span>.
+                  </p>
+                  <ul class="text-xs text-brand-muted space-y-1.5 font-mono">
+                    <li>• Full Stack Integration</li>
+                    <li>• Maximum Capital Velocity</li>
+                    <li>• Dedicated Architect Support</li>
+                  </ul>
+                </div>
+                <div class="pt-4 border-t border-brand-border/60">
+                  <button onclick="event.stopPropagation(); openInquiryModal('Complete Digital System')" class="w-full py-2.5 text-xs font-mono uppercase tracking-wider font-semibold text-brand-void bg-brand-gold rounded hover:brightness-110 transition-all">
+                    Explore Service
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -517,7 +744,7 @@
       <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         
         <!-- Section Header -->
-        <div class="text-center max-w-3xl mx-auto mb-20">
+        <div class="text-center max-w-3xl mx-auto mb-20 reveal-item">
           <span class="px-3.5 py-1 rounded-full bg-brand-surface border border-brand-border text-xs font-mono tracking-widest text-brand-gold uppercase">
             COMPLETE ARCHITECTURE
           </span>
@@ -525,18 +752,18 @@
             YOUR WEBSITE IS ONLY ONE PART OF THE SYSTEM.
           </h2>
           <p class="text-base text-brand-muted leading-relaxed">
-            We connect the important parts of the digital customer journey so your website doesn't just look good — it has a measurable job to do.
+            We connect the important parts of the digital customer journey so your website doesn't just look good — it has a measurable job to do. Click any node below to inspect state transformations.
           </p>
         </div>
 
-        <!-- System Pipeline Flow Visualization -->
-        <div class="relative bg-brand-surface border border-brand-border rounded-2xl p-6 md:p-10 shadow-2xl">
+        <!-- System Pipeline Flow Visualization with Flip-Flop State Cards -->
+        <div class="relative bg-brand-surface border border-brand-border rounded-2xl p-6 md:p-10 shadow-2xl reveal-item">
           
           <!-- Decorative Status Line -->
           <div class="flex flex-wrap items-center justify-between gap-4 pb-8 mb-8 border-b border-brand-border text-xs font-mono text-brand-muted">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-brand-gold"></span>
-              <span class="text-white uppercase font-medium">PIPELINE MONITOR</span>
+              <span class="text-white uppercase font-medium">PIPELINE MONITOR • BUILDWITHBHAVYEE</span>
             </div>
             <div class="flex items-center gap-6">
               <span>NODES: 9 OPERATIONAL</span>
@@ -544,70 +771,124 @@
             </div>
           </div>
 
-          <!-- Flow Grid -->
+          <!-- Flow Grid with Interactive Flip-Flop Node Panels -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 relative">
             
             <!-- Step 1 -->
-            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
-              <div class="text-[10px] font-mono text-brand-gold mb-1">01 / DISCOVERY</div>
+            <div class="system-node-card p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all cursor-pointer group" onclick="toggleNodeDetails(this)">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono text-brand-gold">01 / DISCOVERY</span>
+                <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
+              </div>
               <div class="text-sm font-bold text-white mb-1">Target Traffic</div>
               <p class="text-xs text-brand-muted">Precision acquisition from high-intent search, referral channels, and outbound.</p>
+              <div class="node-expanded-info hidden mt-3 pt-3 border-t border-brand-border text-[11px] text-brand-goldLight">
+                &bull; Inbound attribution tagged & passed dynamically through system cookies.
+              </div>
             </div>
 
             <!-- Step 2 -->
-            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
-              <div class="text-[10px] font-mono text-brand-gold mb-1">02 / DESTINATION</div>
+            <div class="system-node-card p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all cursor-pointer group" onclick="toggleNodeDetails(this)">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono text-brand-gold">02 / DESTINATION</span>
+                <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
+              </div>
               <div class="text-sm font-bold text-white mb-1">Authority Website</div>
               <p class="text-xs text-brand-muted">Immediate positioning clarity, brand credibility, and frictionless navigation.</p>
+              <div class="node-expanded-info hidden mt-3 pt-3 border-t border-brand-border text-[11px] text-brand-goldLight">
+                &bull; Establishes immediate authority in under 5 seconds with zero cognitive drag.
+              </div>
             </div>
 
             <!-- Step 3 -->
-            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
-              <div class="text-[10px] font-mono text-brand-gold mb-1">03 / CONVERSION</div>
+            <div class="system-node-card p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all cursor-pointer group" onclick="toggleNodeDetails(this)">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono text-brand-gold">03 / CONVERSION</span>
+                <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
+              </div>
               <div class="text-sm font-bold text-white mb-1">Landing Experience</div>
               <p class="text-xs text-brand-muted">Singular focus, elimination of decision paralysis, and direct value proof.</p>
+              <div class="node-expanded-info hidden mt-3 pt-3 border-t border-brand-border text-[11px] text-brand-goldLight">
+                &bull; Strips navigation headers and focuses visitor solely on the conversion offer.
+              </div>
             </div>
 
             <!-- Step 4 -->
-            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
-              <div class="text-[10px] font-mono text-brand-gold mb-1">04 / IDENTIFICATION</div>
+            <div class="system-node-card p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all cursor-pointer group" onclick="toggleNodeDetails(this)">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono text-brand-gold">04 / IDENTIFICATION</span>
+                <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
+              </div>
               <div class="text-sm font-bold text-white mb-1">Lead Capture Node</div>
               <p class="text-xs text-brand-muted">Frictionless smart forms, qualification questions, and immediate CRM ingestion.</p>
+              <div class="node-expanded-info hidden mt-3 pt-3 border-t border-brand-border text-[11px] text-brand-goldLight">
+                &bull; Captures budget, timeline, and requirements before dispatching to direct channels.
+              </div>
             </div>
 
             <!-- Step 5 -->
-            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
-              <div class="text-[10px] font-mono text-brand-gold mb-1">05 / DIRECT CHANNEL</div>
+            <div class="system-node-card p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all cursor-pointer group" onclick="toggleNodeDetails(this)">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono text-emerald-400">05 / DIRECT CHANNEL</span>
+                <span class="text-[10px] font-mono text-brand-muted group-hover:text-emerald-400 transition-colors">Inspect &rarr;</span>
+              </div>
               <div class="text-sm font-bold text-white mb-1">WhatsApp Integration</div>
               <p class="text-xs text-brand-muted">Instant verification, conversation initiation, and direct enterprise routing.</p>
+              <div class="node-expanded-info hidden mt-3 pt-3 border-t border-brand-border text-[11px] text-emerald-300">
+                &bull; Triggers pre-formatted chat to +91 7623954045 for instantaneous response times.
+              </div>
             </div>
 
             <!-- Step 6 -->
-            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
-              <div class="text-[10px] font-mono text-brand-gold mb-1">06 / NURTURE</div>
+            <div class="system-node-card p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all cursor-pointer group" onclick="toggleNodeDetails(this)">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono text-brand-gold">06 / NURTURE</span>
+                <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
+              </div>
               <div class="text-sm font-bold text-white mb-1">Automated Follow-Up</div>
               <p class="text-xs text-brand-muted">Timed sequences, contextual case study delivery, and schedule link triggers.</p>
+              <div class="node-expanded-info hidden mt-3 pt-3 border-t border-brand-border text-[11px] text-brand-goldLight">
+                &bull; Re-engages unbooked inquiries automatically after 2h, 24h, and 72h.
+              </div>
             </div>
 
             <!-- Step 7 -->
-            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
-              <div class="text-[10px] font-mono text-brand-gold mb-1">07 / PROPOSITION</div>
+            <div class="system-node-card p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all cursor-pointer group" onclick="toggleNodeDetails(this)">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono text-brand-gold">07 / PROPOSITION</span>
+                <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
+              </div>
               <div class="text-sm font-bold text-white mb-1">Dynamic Offer</div>
               <p class="text-xs text-brand-muted">Tailored scope, tiered enterprise pricing, and clear deliverables.</p>
+              <div class="node-expanded-info hidden mt-3 pt-3 border-t border-brand-border text-[11px] text-brand-goldLight">
+                &bull; Contextual pricing tiers structured specifically to remove buying hesitation.
+              </div>
             </div>
 
             <!-- Step 8 -->
-            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all">
-              <div class="text-[10px] font-mono text-brand-gold mb-1">08 / TRANSACTION</div>
+            <div class="system-node-card p-5 rounded-lg bg-brand-void border border-brand-border hover:border-brand-gold/60 transition-all cursor-pointer group" onclick="toggleNodeDetails(this)">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono text-brand-gold">08 / TRANSACTION</span>
+                <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
+              </div>
               <div class="text-sm font-bold text-white mb-1">Secure Payment</div>
               <p class="text-xs text-brand-muted">Automated invoicing, Stripe/gateway verification, and receipt generation.</p>
+              <div class="node-expanded-info hidden mt-3 pt-3 border-t border-brand-border text-[11px] text-brand-goldLight">
+                &bull; Webhooks automatically update customer ledger and trigger project onboarding.
+              </div>
             </div>
 
             <!-- Step 9 -->
-            <div class="system-node p-5 rounded-lg bg-brand-void border border-brand-gold/40 bg-brand-gold/5 transition-all">
-              <div class="text-[10px] font-mono text-brand-gold mb-1">09 / RETENTION</div>
+            <div class="system-node-card p-5 rounded-lg bg-brand-void border border-brand-gold/40 bg-brand-gold/5 transition-all cursor-pointer group" onclick="toggleNodeDetails(this)">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono text-brand-gold">09 / RETENTION</span>
+                <span class="text-[10px] font-mono text-brand-gold group-hover:text-white transition-colors">Inspect &rarr;</span>
+              </div>
               <div class="text-sm font-bold text-white mb-1">Client Onboarding</div>
               <p class="text-xs text-brand-muted">Instant dashboard access, welcome protocols, and continuous engagement.</p>
+              <div class="node-expanded-info hidden mt-3 pt-3 border-t border-brand-border text-[11px] text-brand-goldLight">
+                &bull; Welcomes the client immediately into a structured deployment roadmap.
+              </div>
             </div>
 
           </div>
@@ -616,11 +897,11 @@
           <div class="mt-8 p-4 rounded-lg bg-brand-void border border-brand-border flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
               <i class="fa-solid fa-network-wired text-brand-gold"></i>
-              <span class="text-xs text-brand-offwhite">Traditional sites stop at Node 02. We build all 9 synchronized layers.</span>
+              <span class="text-xs text-brand-offwhite">Traditional sites stop at Node 02. BuildWithBhavyee engineers all 9 synchronized layers.</span>
             </div>
-            <a href="#contact" class="text-xs font-mono font-semibold uppercase text-brand-gold hover:text-white transition-colors flex items-center gap-2">
+            <button onclick="openInquiryModal('Complete Digital System Architecture')" class="text-xs font-mono font-semibold uppercase text-brand-gold hover:text-white transition-colors flex items-center gap-2 cursor-pointer">
               Deploy Your System <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
+            </button>
           </div>
 
         </div>
@@ -633,13 +914,13 @@
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         
         <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 reveal-item">
           <div>
             <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">SELECTED SYSTEMS DEPLOYED</span>
             <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white">Proven System Blueprints.</h2>
           </div>
           <p class="text-sm text-brand-muted max-w-md">
-            Real architectural models delivered for enterprise operators, specialized coaches, high-ticket consultants, and service firms.
+            Real architectural models delivered for enterprise operators, specialized coaches, high-ticket consultants, and service firms by <span class="text-white">BuildWithBhavyee</span>.
           </p>
         </div>
 
@@ -647,7 +928,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           <!-- Project 1 -->
-          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col">
+          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col reveal-item">
             <div class="h-60 bg-gradient-to-br from-brand-surfaceLight via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void px-3 py-1 rounded border border-brand-border">High-Ticket Consulting</span>
@@ -666,13 +947,13 @@
               </div>
               <div class="pt-4 border-t border-brand-border flex items-center justify-between">
                 <span class="text-xs font-mono text-brand-gold">Funnel + WhatsApp Automation</span>
-                <a href="#contact" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</a>
+                <button onclick="openInquiryModal('Executive Advisory System')" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</button>
               </div>
             </div>
           </article>
 
           <!-- Project 2 -->
-          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col">
+          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col reveal-item">
             <div class="h-60 bg-gradient-to-br from-brand-surfaceLight via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void px-3 py-1 rounded border border-brand-border">Wellness & Healthcare</span>
@@ -691,13 +972,13 @@
               </div>
               <div class="pt-4 border-t border-brand-border flex items-center justify-between">
                 <span class="text-xs font-mono text-brand-gold">Web Architecture + AI Routing</span>
-                <a href="#contact" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</a>
+                <button onclick="openInquiryModal('Clinical Intake Hub')" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</button>
               </div>
             </div>
           </article>
 
           <!-- Project 3 -->
-          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col">
+          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col reveal-item">
             <div class="h-60 bg-gradient-to-br from-brand-surfaceLight via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void px-3 py-1 rounded border border-brand-border">Author & Keynote Speaker</span>
@@ -716,13 +997,13 @@
               </div>
               <div class="pt-4 border-t border-brand-border flex items-center justify-between">
                 <span class="text-xs font-mono text-brand-gold">Editorial UX + Funnel Flow</span>
-                <a href="#contact" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</a>
+                <button onclick="openInquiryModal('Personal Brand Hub')" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</button>
               </div>
             </div>
           </article>
 
           <!-- Project 4 -->
-          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col">
+          <article class="rounded-xl bg-brand-surface border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col reveal-item">
             <div class="h-60 bg-gradient-to-br from-brand-surfaceLight via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void px-3 py-1 rounded border border-brand-border">B2B Professional Services</span>
@@ -741,7 +1022,7 @@
               </div>
               <div class="pt-4 border-t border-brand-border flex items-center justify-between">
                 <span class="text-xs font-mono text-brand-gold">AI Workflows + CRM Integration</span>
-                <a href="#contact" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</a>
+                <button onclick="openInquiryModal('Autonomous RFP Pipeline')" class="text-xs font-mono uppercase font-semibold text-white hover:text-brand-gold transition-colors">Inquire Build &rarr;</button>
               </div>
             </div>
           </article>
@@ -755,7 +1036,7 @@
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         
         <!-- Header -->
-        <div class="max-w-3xl mb-16">
+        <div class="max-w-3xl mb-16 reveal-item">
           <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">METHODICAL DEPLOYMENT</span>
           <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
             How We Build Your Growth Engine.
@@ -768,7 +1049,7 @@
         <!-- 6 Step Timeline -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
-          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">01</span>
             <h3 class="text-lg font-bold text-white mb-2">Discover & Audit</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -776,7 +1057,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">02</span>
             <h3 class="text-lg font-bold text-white mb-2">Architect & Strategize</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -784,7 +1065,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">03</span>
             <h3 class="text-lg font-bold text-white mb-2">Design & Visual Identity</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -792,7 +1073,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">04</span>
             <h3 class="text-lg font-bold text-white mb-2">Engineer & Automate</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -800,7 +1081,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">05</span>
             <h3 class="text-lg font-bold text-white mb-2">QA & Stress-Testing</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -808,7 +1089,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors">
+          <div class="p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">06</span>
             <h3 class="text-lg font-bold text-white mb-2">Launch & System Evolution</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -821,12 +1102,12 @@
       </div>
     </section>
 
-    <!-- WHY CHOOSE AURA (STANDARDS) -->
+    <!-- WHY CHOOSE BUILDWITHBHAVYEE (FLIP-FLOP PROBLEM -> SOLUTION CARDS) -->
     <section class="py-24 bg-brand-surface/30 border-t border-brand-border">
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <div class="lg:col-span-5">
+          <div class="lg:col-span-5 reveal-item">
             <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">OUR OPERATING STANDARD</span>
             <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-6">
               Built Specifically For Business Outcomes, Not Vanity.
@@ -841,7 +1122,7 @@
               </div>
               <div class="flex items-center gap-3">
                 <i class="fa-solid fa-check text-brand-gold"></i>
-                <span>Direct CRM, API, and WhatsApp integration</span>
+                <span>Direct WhatsApp (+91 7623954045) & CRM integration</span>
               </div>
               <div class="flex items-center gap-3">
                 <i class="fa-solid fa-check text-brand-gold"></i>
@@ -850,30 +1131,95 @@
             </div>
           </div>
 
+          <!-- Flip-Flop Problem -> Solution Cards -->
           <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
             
-            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border">
-              <i class="fa-solid fa-bullseye text-brand-gold text-xl mb-4"></i>
-              <h3 class="text-base font-bold text-white mb-2">Business-First Decisioning</h3>
-              <p class="text-xs text-brand-muted leading-relaxed">Every typography selection, layout choice, and API hook is calculated against customer acquisition.</p>
+            <!-- Problem -> Solution Flip Card 1 -->
+            <div class="flip-card reveal-item" style="min-height: 240px;" onclick="this.classList.toggle('is-flipped')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front p-6 rounded-xl bg-brand-surface border border-brand-border flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-red-400 block mb-1">Traditional Problem</span>
+                    <h3 class="text-base font-bold text-white mb-2">Subjective Aesthetics</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed">Designing solely for appearance while failing to answer customer questions or guide pipeline conversions.</p>
+                  </div>
+                  <div class="text-[10px] font-mono text-brand-gold">Tap to see Solution &rarr;</div>
+                </div>
+                <div class="flip-card-back p-6 rounded-xl bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/60 flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-emerald-400 block mb-1">BuildWithBhavyee Solution</span>
+                    <h3 class="text-base font-bold text-white mb-2">Business-First Decisioning</h3>
+                    <p class="text-xs text-brand-offwhite leading-relaxed">Every typography selection, layout choice, and API hook is calculated strictly against qualified client acquisition.</p>
+                  </div>
+                  <div class="text-[10px] font-mono text-brand-gold">&larr; Return to Problem</div>
+                </div>
+              </div>
             </div>
 
-            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border">
-              <i class="fa-solid fa-bolt text-brand-gold text-xl mb-4"></i>
-              <h3 class="text-base font-bold text-white mb-2">Conversion Architecture</h3>
-              <p class="text-xs text-brand-muted leading-relaxed">Cognitive load is reduced. The interface systematically guides attention toward primary conversion actions.</p>
+            <!-- Problem -> Solution Flip Card 2 -->
+            <div class="flip-card reveal-item" style="min-height: 240px;" onclick="this.classList.toggle('is-flipped')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front p-6 rounded-xl bg-brand-surface border border-brand-border flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-red-400 block mb-1">Traditional Problem</span>
+                    <h3 class="text-base font-bold text-white mb-2">Choice Overload & Leaks</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed">Too many conflicting CTAs, clutter, and distractions leading to 95%+ bounce rates on standard templates.</p>
+                  </div>
+                  <div class="text-[10px] font-mono text-brand-gold">Tap to see Solution &rarr;</div>
+                </div>
+                <div class="flip-card-back p-6 rounded-xl bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/60 flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-emerald-400 block mb-1">BuildWithBhavyee Solution</span>
+                    <h3 class="text-base font-bold text-white mb-2">Conversion Architecture</h3>
+                    <p class="text-xs text-brand-offwhite leading-relaxed">Cognitive load is stripped down. The interface systematically guides attention toward primary conversion gates.</p>
+                  </div>
+                  <div class="text-[10px] font-mono text-brand-gold">&larr; Return to Problem</div>
+                </div>
+              </div>
             </div>
 
-            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border">
-              <i class="fa-solid fa-robot text-brand-gold text-xl mb-4"></i>
-              <h3 class="text-base font-bold text-white mb-2">Automated Operations</h3>
-              <p class="text-xs text-brand-muted leading-relaxed">Replace manual data transcription with automated pipelines that trigger the moment an inquiry lands.</p>
+            <!-- Problem -> Solution Flip Card 3 -->
+            <div class="flip-card reveal-item" style="min-height: 240px;" onclick="this.classList.toggle('is-flipped')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front p-6 rounded-xl bg-brand-surface border border-brand-border flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-red-400 block mb-1">Traditional Problem</span>
+                    <h3 class="text-base font-bold text-white mb-2">Manual Data Entry Lag</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed">Inquiries sit in generic inboxes for days before sales teams manually copy them into spreadsheets.</p>
+                  </div>
+                  <div class="text-[10px] font-mono text-brand-gold">Tap to see Solution &rarr;</div>
+                </div>
+                <div class="flip-card-back p-6 rounded-xl bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/60 flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-emerald-400 block mb-1">BuildWithBhavyee Solution</span>
+                    <h3 class="text-base font-bold text-white mb-2">Autonomous Operations</h3>
+                    <p class="text-xs text-brand-offwhite leading-relaxed">Instant automated pipelines transmit notifications to WhatsApp and CRMs within 30 seconds of submission.</p>
+                  </div>
+                  <div class="text-[10px] font-mono text-brand-gold">&larr; Return to Problem</div>
+                </div>
+              </div>
             </div>
 
-            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border">
-              <i class="fa-solid fa-shield-halved text-brand-gold text-xl mb-4"></i>
-              <h3 class="text-base font-bold text-white mb-2">Engineered For Scale</h3>
-              <p class="text-xs text-brand-muted leading-relaxed">Built on modular foundations ready to support 100 or 100,000 inquiries without architectural refactoring.</p>
+            <!-- Problem -> Solution Flip Card 4 -->
+            <div class="flip-card reveal-item" style="min-height: 240px;" onclick="this.classList.toggle('is-flipped')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front p-6 rounded-xl bg-brand-surface border border-brand-border flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-red-400 block mb-1">Traditional Problem</span>
+                    <h3 class="text-base font-bold text-white mb-2">Fragile No-Code Bloat</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed">Heavy page builders that break under high traffic spikes or plugin updates, creating catastrophic downtime.</p>
+                  </div>
+                  <div class="text-[10px] font-mono text-brand-gold">Tap to see Solution &rarr;</div>
+                </div>
+                <div class="flip-card-back p-6 rounded-xl bg-gradient-to-br from-brand-surfaceLight to-brand-surface border border-brand-gold/60 flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-emerald-400 block mb-1">BuildWithBhavyee Solution</span>
+                    <h3 class="text-base font-bold text-white mb-2">Engineered For Scale</h3>
+                    <p class="text-xs text-brand-offwhite leading-relaxed">Lightweight, modular enterprise foundations capable of handling massive surges with unwavering reliability.</p>
+                  </div>
+                  <div class="text-[10px] font-mono text-brand-gold">&larr; Return to Problem</div>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -885,7 +1231,7 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="py-24 md:py-32 bg-brand-void border-t border-brand-border">
       <div class="max-w-5xl mx-auto px-6 lg:px-12">
-        <div class="p-8 md:p-14 rounded-2xl bg-brand-surface border border-brand-border relative overflow-hidden">
+        <div class="p-8 md:p-14 rounded-2xl bg-brand-surface border border-brand-border relative overflow-hidden reveal-item">
           
           <div class="relative z-10 space-y-6">
             <span class="text-xs font-mono uppercase tracking-widest text-brand-gold block">COMPANY PHILOSOPHY</span>
@@ -897,12 +1243,13 @@
                 In an era where standard web pages have become commoditized, aesthetic appeal alone yields diminishing returns. Businesses do not require more disconnected templates; they require operational systems.
               </p>
               <p>
-                AURA Digital Systems operates at the intersection of conversion strategy, bespoke interface engineering, and autonomous process orchestration. We partner with ambitious organizations worldwide to eliminate manual sales friction and construct resilient digital infrastructure.
+                <span class="text-white font-semibold">BuildWithBhavyee</span> operates at the intersection of conversion strategy, bespoke interface engineering, and autonomous process orchestration. We partner with ambitious organizations worldwide to eliminate manual sales friction and construct resilient digital infrastructure.
               </p>
             </div>
             <div class="pt-6 border-t border-brand-border flex flex-wrap gap-8 text-xs font-mono text-brand-muted uppercase">
               <div><span class="text-white font-bold">FOCUS:</span> Enterprise Conversion Infrastructure</div>
               <div><span class="text-white font-bold">ETHOS:</span> Measurable Revenue Velocity</div>
+              <div><span class="text-white font-bold">CHANNELS:</span> Email & Direct WhatsApp</div>
             </div>
           </div>
 
@@ -912,7 +1259,7 @@
 
     <!-- FINAL CALL TO ACTION (CINEMATIC) -->
     <section class="py-24 md:py-36 bg-gradient-to-b from-brand-void via-brand-surface/60 to-brand-void border-t border-brand-border relative text-center">
-      <div class="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 relative z-10 reveal-item">
         <span class="text-xs font-mono tracking-widest uppercase text-brand-gold px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/5 inline-block mb-6">
           IMMEDIATE PIPELINE ACCELERATION
         </span>
@@ -921,16 +1268,16 @@
           <span class="gold-gradient-text">LET’S BUILD THE SYSTEM BEHIND IT.</span>
         </h2>
         <p class="text-base md:text-lg text-brand-muted max-w-2xl mx-auto mb-10 leading-relaxed">
-          Whether you need an authoritative website, high-converting funnel, AI automated workflow, or an integrated customer acquisition pipeline, let's engineer something built for scale.
+          Whether you need an authoritative website, high-converting funnel, AI automated workflow, or an integrated customer acquisition pipeline, let's engineer something built for scale with <span class="text-white font-medium">BuildWithBhavyee</span>.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-bold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-glow hover:brightness-110 transition-all duration-300">
+          <button onclick="openInquiryModal()" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-bold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-glow hover:brightness-110 transition-all duration-300 cursor-pointer">
             Start A Project
             <i class="fa-solid fa-arrow-right ml-3 text-xs"></i>
-          </a>
-          <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-semibold text-brand-offwhite bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-colors">
+          </button>
+          <a href="https://wa.me/917623954045?text=Hello%20BuildWithBhavyee,%20I%20have%20a%20business%20goal%20and%20want%20to%20discuss%20building%20a%20system." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-xs font-mono tracking-widest uppercase font-semibold text-brand-offwhite bg-brand-surface border border-brand-border hover:border-brand-gold/50 transition-colors">
             <i class="fa-brands fa-whatsapp mr-2.5 text-emerald-400 text-sm"></i>
-            WhatsApp Us
+            WhatsApp Us (+91 7623954045)
           </a>
         </div>
       </div>
@@ -942,15 +1289,40 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
           <!-- Left Info Column -->
-          <div class="lg:col-span-5 space-y-8">
+          <div class="lg:col-span-5 space-y-8 reveal-item">
             <div>
               <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">PROJECT INITIATION</span>
               <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
                 Begin Your Digital Transformation.
               </h2>
               <p class="text-sm text-brand-muted leading-relaxed">
-                Submit your project specifications. Our systems architects review inquiries within 24 hours to schedule your preliminary scoping session.
+                Submit your project specifications or contact us directly. Our systems architects review inquiries within 24 hours to schedule your preliminary scoping session.
               </p>
+            </div>
+
+            <!-- Direct Functional Contact Details -->
+            <div class="p-6 rounded-xl bg-brand-surface border border-brand-border space-y-4">
+              <!-- Direct Functional Email -->
+              <a href="mailto:bhavydetroja0234@gmail.com" class="flex items-center gap-4 p-3 rounded-lg bg-brand-void/80 border border-brand-border hover:border-brand-gold/60 transition-all group">
+                <div class="w-10 h-10 rounded bg-brand-surface border border-brand-border flex items-center justify-center text-brand-gold group-hover:scale-105 transition-transform shrink-0">
+                  <i class="fa-solid fa-envelope text-sm"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] font-mono uppercase text-brand-muted">Direct Email</div>
+                  <div class="text-xs font-bold text-white group-hover:text-brand-gold transition-colors">bhavydetroja0234@gmail.com</div>
+                </div>
+              </a>
+
+              <!-- Direct Functional WhatsApp -->
+              <a href="https://wa.me/917623954045?text=Hello%20BuildWithBhavyee,%20I%20would%20like%20to%20initiate%20a%20project." target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 rounded-lg bg-brand-void/80 border border-brand-border hover:border-emerald-500/50 transition-all group">
+                <div class="w-10 h-10 rounded bg-brand-surface border border-brand-border flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform shrink-0">
+                  <i class="fa-brands fa-whatsapp text-base"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] font-mono uppercase text-emerald-400">Instant WhatsApp Desk</div>
+                  <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">+91 7623954045</div>
+                </div>
+              </a>
             </div>
 
             <div class="p-6 rounded-xl bg-brand-surface border border-brand-border space-y-4">
@@ -986,10 +1358,10 @@
           </div>
 
           <!-- Contact Form Right Column -->
-          <div class="lg:col-span-7">
+          <div class="lg:col-span-7 reveal-item">
             <div class="p-8 md:p-10 rounded-2xl bg-brand-surface border border-brand-border shadow-2xl">
               
-              <form id="contactForm" class="space-y-6" onsubmit="event.preventDefault(); handleFormSubmit();">
+              <form id="contactForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <!-- Name -->
@@ -1015,7 +1387,7 @@
                   <!-- WhatsApp / Phone -->
                   <div>
                     <label for="phoneNum" class="block text-xs font-mono uppercase tracking-wider text-brand-offwhite mb-2">WhatsApp / Phone *</label>
-                    <input type="tel" id="phoneNum" required placeholder="+1 (555) 019-2834" class="w-full px-4 py-3 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors">
+                    <input type="tel" id="phoneNum" required placeholder="+91 7623954045" class="w-full px-4 py-3 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-sm text-white transition-colors">
                   </div>
                 </div>
 
@@ -1049,14 +1421,14 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" id="submitBtn" class="w-full py-4 text-xs font-mono uppercase tracking-widest font-bold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-sm hover:shadow-gold-glow hover:brightness-110 transition-all duration-300">
+                <button type="submit" id="submitBtn" class="w-full py-4 text-xs font-mono uppercase tracking-widest font-bold text-brand-void bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-accent rounded-sm shadow-gold-sm hover:shadow-gold-glow hover:brightness-110 transition-all duration-300 cursor-pointer">
                   Submit System Specifications
                 </button>
 
                 <!-- Feedback Toast -->
                 <div id="formSuccess" class="hidden p-4 rounded bg-emerald-950/60 border border-emerald-500/50 text-emerald-200 text-xs font-mono">
                   <i class="fa-solid fa-check-circle mr-2 text-emerald-400"></i>
-                  System inquiry transmitted successfully. A lead architect will review your specifications and contact your designated channel shortly.
+                  System inquiry transmitted successfully to BuildWithBhavyee. We will review your brief and contact your designated WhatsApp (+91 7623954045 or submitted phone) shortly.
                 </div>
 
               </form>
@@ -1083,13 +1455,15 @@
               <polyline points="2 12 12 17 22 12"></polyline>
             </svg>
           </div>
-          <span class="font-mono text-sm tracking-widest text-white uppercase font-bold">AURA DIGITAL SYSTEMS</span>
+          <span class="font-mono text-sm tracking-widest text-white uppercase font-bold">BuildWithBhavyee</span>
         </div>
         <p class="max-w-sm text-brand-muted leading-relaxed">
           Engineering high-conversion business websites, structured funnels, and autonomous AI pipelines for forward-thinking enterprises.
         </p>
-        <div class="font-mono text-[11px] text-brand-gold">
-          OPERATIONAL STATE: GLOBAL
+        <div class="space-y-1 font-mono text-[11px]">
+          <div><span class="text-brand-muted">Email:</span> <a href="mailto:bhavydetroja0234@gmail.com" class="text-brand-gold hover:underline">bhavydetroja0234@gmail.com</a></div>
+          <div><span class="text-brand-muted">WhatsApp:</span> <a href="https://wa.me/917623954045" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">+91 7623954045</a></div>
+          <div class="text-brand-gold pt-1">OPERATIONAL STATE: GLOBAL</div>
         </div>
       </div>
 
@@ -1112,16 +1486,436 @@
           Conversion Design • Dynamic Landing Pages • AI Ingestion • WhatsApp CRM Flow • Automated Scheduling • Stripe Integration • Performance Optimization
         </p>
         <div class="pt-4 text-[11px] text-brand-muted/70">
-          &copy; 2026 AURA Digital Systems. All rights reserved. Enterprise Digital Architecture.
+          &copy; 2026 BuildWithBhavyee. All rights reserved. Enterprise Digital Architecture.
         </div>
       </div>
 
     </div>
   </footer>
 
-  <!-- Light Javascript Logic for UI & Form Interactivity -->
+  <!-- ========================================================================= -->
+  <!-- MODALS & POP-UPS (MICRO-INTERACTIONS & INQUIRY MODAL) -->
+  <!-- ========================================================================= -->
+
+  <!-- 1. Dedicated Project Inquiry Modal -->
+  <div id="inquiryModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-void/85 backdrop-blur-md hidden transition-all duration-300">
+    <div class="relative w-full max-w-xl bg-brand-surface border border-brand-borderLight rounded-2xl p-6 sm:p-8 shadow-2xl transform scale-95 transition-transform duration-300" id="inquiryModalContent">
+      
+      <!-- Close Button -->
+      <button onclick="closeInquiryModal()" class="absolute top-5 right-5 text-brand-muted hover:text-white transition-colors p-2 text-lg" aria-label="Close Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="mb-6">
+        <div class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-1">BUILDWITHBHAVYEE INTAKE</div>
+        <h3 class="text-xl sm:text-2xl font-bold text-white">Initialize Your Digital System</h3>
+        <p class="text-xs text-brand-muted mt-1">Fill out the project scope or message our team directly via WhatsApp.</p>
+      </div>
+
+      <!-- Modal Form -->
+      <form id="modalInquiryForm" class="space-y-4" onsubmit="handleModalSubmit(event)">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] font-mono uppercase text-brand-muted mb-1">Full Name *</label>
+            <input type="text" id="mName" required placeholder="Alexander Vance" class="w-full px-3.5 py-2.5 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-xs text-white">
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono uppercase text-brand-muted mb-1">Business Name *</label>
+            <input type="text" id="mBusiness" required placeholder="Vance Advisory" class="w-full px-3.5 py-2.5 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-xs text-white">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] font-mono uppercase text-brand-muted mb-1">Email *</label>
+            <input type="email" id="mEmail" required placeholder="alexander@vance.com" class="w-full px-3.5 py-2.5 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-xs text-white">
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono uppercase text-brand-muted mb-1">Phone / WhatsApp *</label>
+            <input type="tel" id="mPhone" required placeholder="+91 7623954045" class="w-full px-3.5 py-2.5 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-xs text-white">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] font-mono uppercase text-brand-muted mb-1">Primary Need *</label>
+            <select id="mScope" required class="w-full px-3.5 py-2.5 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-xs text-white">
+              <option value="Complete Digital System">Complete Digital System</option>
+              <option value="High-Converting Website">High-Converting Website</option>
+              <option value="Sales Funnel Architecture">Sales Funnel Architecture</option>
+              <option value="AI Workflow Automation">AI Workflow Automation</option>
+              <option value="WhatsApp Follow-up Pipeline">WhatsApp Follow-up Pipeline</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono uppercase text-brand-muted mb-1">Budget Allocation</label>
+            <select id="mBudget" class="w-full px-3.5 py-2.5 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-xs text-white">
+              <option value="$2,500 – $5,000">$2,500 – $5,000</option>
+              <option value="$5,000 – $10,000">$5,000 – $10,000</option>
+              <option value="$10,000+">$10,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-mono uppercase text-brand-muted mb-1">Brief Details</label>
+          <textarea id="mDetails" rows="3" placeholder="Tell us about your core objective..." class="w-full px-3.5 py-2.5 rounded bg-brand-void border border-brand-border focus:border-brand-gold focus:outline-none text-xs text-white resize-none"></textarea>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+          <button type="submit" id="mSubmitBtn" class="flex-1 py-3 text-xs font-mono uppercase tracking-wider font-bold text-brand-void bg-brand-gold rounded hover:brightness-110 transition-all cursor-pointer">
+            Transmit Specifications
+          </button>
+          <a href="https://wa.me/917623954045?text=Hello%20BuildWithBhavyee,%20I%20am%20ready%20to%20discuss%20a%20new%20system." target="_blank" rel="noopener noreferrer" class="px-5 py-3 text-xs font-mono tracking-wider font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded flex items-center justify-center gap-2 hover:bg-emerald-500/20 transition-all">
+            <i class="fa-brands fa-whatsapp"></i> Chat On WhatsApp
+          </a>
+        </div>
+
+        <div id="mSuccessAlert" class="hidden p-3 rounded bg-emerald-950/60 border border-emerald-500/50 text-emerald-300 text-xs font-mono">
+          ✓ Received by BuildWithBhavyee. Our lead developer will connect with you via WhatsApp / Email shortly.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Exit / Intent Inquiry Slide-in Popup -->
+  <div id="exitIntentPopup" class="fixed bottom-6 right-6 z-40 max-w-sm w-[90%] sm:w-full bg-brand-surface border border-brand-gold/40 rounded-xl p-5 shadow-gold-glow translate-y-32 opacity-0 pointer-events-none transition-all duration-500">
+    <div class="flex items-start justify-between mb-2">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+        <span class="text-xs font-mono text-brand-gold uppercase tracking-wider font-bold">Have a project in mind?</span>
+      </div>
+      <button onclick="dismissExitPopup()" class="text-brand-muted hover:text-white transition-colors" aria-label="Dismiss Popup">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+    </div>
+    <p class="text-xs text-brand-muted leading-relaxed mb-4">
+      Let's blueprint a high-converting digital system or automated pipeline tailored to your current revenue goals.
+    </p>
+    <div class="flex items-center gap-2.5">
+      <button onclick="dismissExitPopup(); openInquiryModal();" class="flex-1 py-2 text-[11px] font-mono uppercase font-bold text-brand-void bg-brand-gold rounded hover:brightness-110 transition-all">
+        Start Project
+      </button>
+      <a href="https://wa.me/917623954045?text=Hello%20BuildWithBhavyee,%20I%20have%20a%20project%20in%20mind." target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded flex items-center gap-1.5 hover:bg-emerald-500/20 transition-all">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- 3. Floating Live Notification Toast -->
+  <div id="liveToast" class="fixed top-24 right-6 z-40 hidden md:flex items-center gap-3 p-3.5 rounded-lg bg-brand-surface/95 border border-brand-border shadow-2xl backdrop-blur-md pointer-events-none">
+    <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs">
+      <i class="fa-solid fa-bolt"></i>
+    </div>
+    <div class="text-[11px] font-mono">
+      <div class="text-white font-semibold">New Pipeline Architecture Active</div>
+      <div class="text-brand-muted">Automated CRM & WhatsApp routing in sync</div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: THREE.JS 3D CANVAS, POPUPS, FLIP CARDS & MICRO-INTERACTIONS -->
+  <!-- ========================================================================= -->
   <script>
-    // Mobile Drawer Navigation Toggle
+    // --------------------------------------------------------------------------
+    // 1. THREE.JS INTERACTIVE 3D DIGITAL SYSTEM CANVAS (Hero 3D Network)
+    // --------------------------------------------------------------------------
+    (function initHero3D() {
+      const canvas = document.getElementById('hero-3d-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 85;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // 3D Nodes and Network Pipeline
+      const nodeCount = window.innerWidth < 768 ? 36 : 72;
+      const nodesGeometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(nodeCount * 3);
+      const velocities = [];
+
+      for (let i = 0; i < nodeCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 140;     // X
+        positions[i + 1] = (Math.random() - 0.5) * 90;  // Y
+        positions[i + 2] = (Math.random() - 0.5) * 70;  // Z
+        velocities.push({
+          x: (Math.random() - 0.5) * 0.04,
+          y: (Math.random() - 0.5) * 0.04,
+          z: (Math.random() - 0.5) * 0.03
+        });
+      }
+      nodesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      // Gold Glow Particle Shader Material
+      const pMaterial = new THREE.PointsMaterial({
+        color: 0xD4AF37,
+        size: window.innerWidth < 768 ? 2.2 : 3.0,
+        transparent: true,
+        opacity: 0.85,
+        blending: THREE.AdditiveBlending
+      });
+      const particleSystem = new THREE.Points(nodesGeometry, pMaterial);
+      scene.add(particleSystem);
+
+      // 3D Connected Wireframe Geometry (Representing System Pipeline Flow)
+      const linesMaterial = new THREE.LineBasicMaterial({
+        color: 0xC5A059,
+        transparent: true,
+        opacity: 0.18,
+        blending: THREE.AdditiveBlending
+      });
+      const linesMesh = new THREE.LineSegments(new THREE.BufferGeometry(), linesMaterial);
+      scene.add(linesMesh);
+
+      // Central Digital Orb (Abstract Core Engine)
+      const coreGeo = new THREE.IcosahedronGeometry(18, 1);
+      const coreMat = new THREE.MeshBasicMaterial({
+        color: 0xD4AF37,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.12
+      });
+      const centralOrb = new THREE.Mesh(coreGeo, coreMat);
+      centralOrb.position.set(30, -5, -15);
+      scene.add(centralOrb);
+
+      // Ambient Lighting for 3D Elements
+      const pointLight = new THREE.PointLight(0xF3E5AB, 1.2, 200);
+      pointLight.position.set(20, 20, 40);
+      scene.add(pointLight);
+
+      // Mouse-follow interaction parameters
+      let mouseX = 0;
+      let mouseY = 0;
+      let targetX = 0;
+      let targetY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.0006;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.0006;
+      }, { passive: true });
+
+      // Resize Handler
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // Smooth Animation Loop
+      function animate3D() {
+        requestAnimationFrame(animate3D);
+
+        // Smooth camera dampening
+        targetX += (mouseX - targetX) * 0.05;
+        targetY += (mouseY - targetY) * 0.05;
+        camera.position.x = targetX * 45;
+        camera.position.y = -targetY * 35;
+        camera.lookAt(scene.position);
+
+        centralOrb.rotation.x += 0.0015;
+        centralOrb.rotation.y += 0.0025;
+
+        // Animate particles & dynamic line interconnects
+        const pos = particleSystem.geometry.attributes.position.array;
+        const linePositions = [];
+
+        for (let i = 0; i < nodeCount; i++) {
+          const idx = i * 3;
+          pos[idx] += velocities[i].x;
+          pos[idx + 1] += velocities[i].y;
+          pos[idx + 2] += velocities[i].z;
+
+          // Boundary Bounce
+          if (Math.abs(pos[idx]) > 75) velocities[i].x *= -1;
+          if (Math.abs(pos[idx + 1]) > 50) velocities[i].y *= -1;
+          if (Math.abs(pos[idx + 2]) > 40) velocities[i].z *= -1;
+
+          // Connect nearby nodes
+          for (let j = i + 1; j < nodeCount; j++) {
+            const jdx = j * 3;
+            const dx = pos[idx] - pos[jdx];
+            const dy = pos[idx + 1] - pos[jdx + 1];
+            const dz = pos[idx + 2] - pos[jdx + 2];
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+            if (dist < 26) {
+              linePositions.push(pos[idx], pos[idx + 1], pos[idx + 2]);
+              linePositions.push(pos[jdx], pos[jdx + 1], pos[jdx + 2]);
+            }
+          }
+        }
+        particleSystem.geometry.attributes.position.needsUpdate = true;
+
+        linesMesh.geometry.dispose();
+        linesMesh.geometry = new THREE.BufferGeometry();
+        linesMesh.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+
+        renderer.render(scene, camera);
+      }
+      animate3D();
+    })();
+
+    // --------------------------------------------------------------------------
+    // 2. PARALLAX 3D PERSPECTIVE CARD ROTATION IN HERO
+    // --------------------------------------------------------------------------
+    const heroCard = document.getElementById('heroInteractiveCard');
+    if (heroCard && window.innerWidth > 1024) {
+      document.addEventListener('mousemove', (e) => {
+        const rect = heroCard.getBoundingClientRect();
+        const cardX = rect.left + rect.width / 2;
+        const cardY = rect.top + rect.height / 2;
+        const deltaX = (e.clientX - cardX) / 45;
+        const deltaY = (e.clientY - cardY) / 45;
+        heroCard.style.transform = `perspective(1000px) rotateY(${deltaX}deg) rotateX(${-deltaY}deg)`;
+      });
+    }
+
+    // Interactive node highlight feedback
+    function pulseNode(el) {
+      el.classList.add('border-brand-gold', 'scale-[1.02]');
+      setTimeout(() => {
+        el.classList.remove('scale-[1.02]');
+      }, 300);
+    }
+
+    // Toggle node inspection in Systems section
+    function toggleNodeDetails(card) {
+      const detail = card.querySelector('.node-expanded-info');
+      if (detail) {
+        detail.classList.toggle('hidden');
+      }
+    }
+
+    // --------------------------------------------------------------------------
+    // 3. INQUIRY MODAL POPUP LOGIC
+    // --------------------------------------------------------------------------
+    const inquiryModal = document.getElementById('inquiryModal');
+    const modalContent = document.getElementById('inquiryModalContent');
+    const modalScope = document.getElementById('mScope');
+
+    function openInquiryModal(defaultScope) {
+      if (defaultScope && modalScope) {
+        modalScope.value = defaultScope;
+      }
+      inquiryModal.classList.remove('hidden');
+      setTimeout(() => {
+        modalContent.classList.remove('scale-95');
+        modalContent.classList.add('scale-100');
+      }, 10);
+    }
+
+    function closeInquiryModal() {
+      modalContent.classList.remove('scale-100');
+      modalContent.classList.add('scale-95');
+      setTimeout(() => {
+        inquiryModal.classList.add('hidden');
+      }, 200);
+    }
+
+    // Close on outside click
+    inquiryModal.addEventListener('click', (e) => {
+      if (e.target === inquiryModal) closeInquiryModal();
+    });
+
+    // Handle Modal Form Submission
+    function handleModalSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('mSubmitBtn');
+      const alertBox = document.getElementById('mSuccessAlert');
+      
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Syncing With Server...';
+
+      setTimeout(() => {
+        submitBtn.classList.add('hidden');
+        alertBox.classList.remove('hidden');
+        setTimeout(() => {
+          closeInquiryModal();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Transmit Specifications';
+          submitBtn.classList.remove('hidden');
+          alertBox.classList.add('hidden');
+          document.getElementById('modalInquiryForm').reset();
+        }, 3200);
+      }, 950);
+    }
+
+    // --------------------------------------------------------------------------
+    // 4. EXIT-INTENT / ENGAGEMENT POPUP LOGIC
+    // --------------------------------------------------------------------------
+    const exitPopup = document.getElementById('exitIntentPopup');
+    let popupShown = false;
+
+    function showExitPopup() {
+      if (popupShown) return;
+      popupShown = true;
+      exitPopup.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+      exitPopup.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    }
+
+    function dismissExitPopup() {
+      exitPopup.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      exitPopup.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+    }
+
+    // Trigger exit popup on cursor leaving towards top (Desktop) or after 25 seconds
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY <= 0) showExitPopup();
+    });
+    setTimeout(showExitPopup, 26000);
+
+    // --------------------------------------------------------------------------
+    // 5. LIVE NOTIFICATION TOAST POPUP (Tasteful periodic proof)
+    // --------------------------------------------------------------------------
+    const liveToast = document.getElementById('liveToast');
+    setTimeout(() => {
+      if (liveToast) {
+        liveToast.classList.remove('hidden');
+        liveToast.classList.add('animate-toast');
+      }
+    }, 4500);
+
+    // --------------------------------------------------------------------------
+    // 6. SCROLL REVEAL OBSERVER (Smooth Motion)
+    // --------------------------------------------------------------------------
+    const revealItems = document.querySelectorAll('.reveal-item');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersectObserver ? entry.isIntersecting : entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach(el => revealObserver.observe(el));
+
+    // --------------------------------------------------------------------------
+    // 7. CONTACT SECTION FORM HANDLER
+    // --------------------------------------------------------------------------
+    function handleFormSubmit(e) {
+      if (e) e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const successBox = document.getElementById('formSuccess');
+      
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Transmitting System Brief...';
+      
+      setTimeout(() => {
+        btn.classList.add('hidden');
+        successBox.classList.remove('hidden');
+        document.getElementById('contactForm').reset();
+      }, 1000);
+    }
+
+    // --------------------------------------------------------------------------
+    // 8. MOBILE NAVIGATION DRAWER TOGGLE
+    // --------------------------------------------------------------------------
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const menuIcon = document.getElementById('menuIcon');
@@ -1151,7 +1945,9 @@
       });
     }
 
-    // Scroll Navbar Elevation Effect
+    // --------------------------------------------------------------------------
+    // 9. HEADER SCROLL ELEVATION EFFECT
+    // --------------------------------------------------------------------------
     const header = document.getElementById('mainHeader');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
@@ -1161,22 +1957,7 @@
         header.classList.remove('shadow-lg', 'bg-brand-void/95');
         header.classList.add('bg-brand-void/80');
       }
-    });
-
-    // Contact Form Ingestion Simulation
-    function handleFormSubmit() {
-      const btn = document.getElementById('submitBtn');
-      const successBox = document.getElementById('formSuccess');
-      
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Transmitting System Brief...';
-      
-      setTimeout(() => {
-        btn.classList.add('hidden');
-        successBox.classList.remove('hidden');
-        document.getElementById('contactForm').reset();
-      }, 1100);
-    }
+    }, { passive: true });
   </script>
 </body>
 </html>
