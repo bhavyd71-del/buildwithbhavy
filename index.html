@@ -254,16 +254,45 @@
       animation: orbFloat 14s ease-in-out infinite alternate;
     }
 
-    /* Scroll Reveal & Micro-motion */
-    .reveal-item {
+    /* =========================================================================
+       DYNAMIC SCROLL-BASED OUTSIDE → INSIDE / INSIDE → OUTSIDE ENGINE
+       Animates elements from outside viewport into place when scrolling down,
+       and pulls them back out when scrolling up or leaving view.
+       ========================================================================= */
+    .scroll-dynamic {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      transition: 
+        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
-    .reveal-item.revealed {
-      opacity: 1;
-      transform: translateY(0);
+
+    /* Directional Off-Screen Starting States (OUTSIDE) */
+    .scroll-from-left {
+      transform: translate3d(-110px, 0, 0) scale(0.94) rotateY(9deg);
+    }
+    .scroll-from-right {
+      transform: translate3d(110px, 0, 0) scale(0.94) rotateY(-9deg);
+    }
+    .scroll-from-top {
+      transform: translate3d(0, -90px, 0) scale(0.95);
+    }
+    .scroll-from-bottom {
+      transform: translate3d(0, 95px, 0) scale(0.94);
+    }
+
+    /* Dynamic Stagger Delays for Rich Cascade */
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+    .delay-5 { transition-delay: 0.40s; }
+    .delay-6 { transition-delay: 0.48s; }
+
+    /* Settled In-Place State (INSIDE) */
+    .scroll-dynamic.is-inside {
+      opacity: 1 !important;
+      transform: translate3d(0, 0, 0) scale(1) rotateY(0deg) !important;
     }
 
     /* Live Toast Notification animation */
@@ -278,9 +307,11 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .ambient-orb, .scroll-smooth, .flip-card-inner, .icon-float {
+      .ambient-orb, .scroll-smooth, .flip-card-inner, .icon-float, .scroll-dynamic {
         animation: none !important;
         transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
         scroll-behavior: auto !important;
       }
       .flip-card:hover .flip-card-inner {
@@ -324,7 +355,6 @@
 <body class="bg-brand-void text-brand-offwhite antialiased selection:bg-brand-gold selection:text-brand-void">
 
   <!-- PERSISTENT HERO 3D LAYER CONTAINER -->
-  <!-- Keeps the exact Three.js canvas alive and stable; smoothly transitions via opacity upon scroll instead of being abruptly removed -->
   <div id="hero-3d-persistent-wrap" class="fixed inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-700 ease-out">
     <canvas id="hero-3d-canvas" class="w-full h-full pointer-events-auto opacity-75"></canvas>
   </div>
@@ -410,8 +440,8 @@
       
       <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10 pointer-events-none">
         
-        <!-- Left Content Column -->
-        <div class="lg:col-span-7 flex flex-col items-start space-y-6 md:space-y-8 pointer-events-auto reveal-item">
+        <!-- Left Content Column (Animated from Left) -->
+        <div class="lg:col-span-7 flex flex-col items-start space-y-6 md:space-y-8 pointer-events-auto scroll-dynamic scroll-from-left">
           
           <!-- System Eyebrow Badge -->
           <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-surface/80 border border-brand-border text-xs font-mono tracking-widest text-brand-gold uppercase backdrop-blur-md shadow-sm">
@@ -442,23 +472,23 @@
 
           <!-- Enterprise Trust Indicators with Glass Treatment -->
           <div class="pt-6 border-t border-brand-border/80 grid grid-cols-3 gap-4 sm:gap-6 w-full max-w-lg">
-            <div class="glass-panel p-3.5 rounded-lg">
+            <div class="glass-panel p-3.5 rounded-lg scroll-dynamic scroll-from-bottom delay-1">
               <div class="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">100%</div>
               <div class="text-[10px] sm:text-[11px] font-mono tracking-wider text-brand-muted uppercase mt-0.5">Engineered Flow</div>
             </div>
-            <div class="glass-panel p-3.5 rounded-lg">
+            <div class="glass-panel p-3.5 rounded-lg scroll-dynamic scroll-from-bottom delay-2">
               <div class="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">24/7</div>
               <div class="text-[10px] sm:text-[11px] font-mono tracking-wider text-brand-muted uppercase mt-0.5">Automated Capture</div>
             </div>
-            <div class="glass-panel p-3.5 rounded-lg">
+            <div class="glass-panel p-3.5 rounded-lg scroll-dynamic scroll-from-bottom delay-3">
               <div class="font-mono text-xl sm:text-2xl font-bold text-white tracking-tight">&lt;350ms</div>
               <div class="text-[10px] sm:text-[11px] font-mono tracking-wider text-brand-muted uppercase mt-0.5">System Latency</div>
             </div>
           </div>
         </div>
 
-        <!-- Right Visual Column: Interactive 3D System Pipeline Matrix with 3D Depth Card -->
-        <div class="lg:col-span-5 relative perspective-1000 pointer-events-auto reveal-item" id="heroInteractiveCard">
+        <!-- Right Visual Column (Animated from Right) -->
+        <div class="lg:col-span-5 relative perspective-1000 pointer-events-auto scroll-dynamic scroll-from-right delay-2" id="heroInteractiveCard">
           <div class="relative w-full rounded-2xl glass-panel p-6 shadow-card-depth border border-brand-borderLight hover:border-brand-gold/40 transition-all duration-300">
             
             <!-- Terminal Header -->
@@ -553,8 +583,8 @@
     <section id="services" class="py-24 md:py-32 bg-brand-surface/30 border-t border-brand-border relative">
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         
-        <!-- Section Header -->
-        <div class="max-w-3xl mb-16 md:mb-20 reveal-item">
+        <!-- Section Header (Animated from Top) -->
+        <div class="max-w-3xl mb-16 md:mb-20 scroll-dynamic scroll-from-top">
           <div class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-3">SYSTEM CAPABILITIES</div>
           <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white mb-5">
             Engineered For Frictionless Performance.
@@ -564,11 +594,11 @@
           </p>
         </div>
 
-        <!-- 6 Core Services Grid featuring 3D FLIP-FLOP cards -->
+        <!-- 6 Core Services Grid featuring Directional Outside->Inside animations -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           
-          <!-- Flip Card 1: Websites -->
-          <div class="flip-card reveal-item" onclick="toggleCardFlip(this)">
+          <!-- Flip Card 1: Websites (Enters from Left) -->
+          <div class="flip-card scroll-dynamic scroll-from-left delay-1" onclick="toggleCardFlip(this)">
             <div class="flip-card-inner">
               <!-- Front -->
               <div class="flip-card-front p-8 flex flex-col justify-between">
@@ -616,8 +646,8 @@
             </div>
           </div>
 
-          <!-- Flip Card 2: Landing Pages -->
-          <div class="flip-card reveal-item" onclick="toggleCardFlip(this)">
+          <!-- Flip Card 2: Landing Pages (Enters from Top) -->
+          <div class="flip-card scroll-dynamic scroll-from-top delay-2" onclick="toggleCardFlip(this)">
             <div class="flip-card-inner">
               <!-- Front -->
               <div class="flip-card-front p-8 flex flex-col justify-between">
@@ -665,8 +695,8 @@
             </div>
           </div>
 
-          <!-- Flip Card 3: Sales Funnels -->
-          <div class="flip-card reveal-item" onclick="toggleCardFlip(this)">
+          <!-- Flip Card 3: Sales Funnels (Enters from Right) -->
+          <div class="flip-card scroll-dynamic scroll-from-right delay-3" onclick="toggleCardFlip(this)">
             <div class="flip-card-inner">
               <!-- Front -->
               <div class="flip-card-front p-8 flex flex-col justify-between">
@@ -714,8 +744,8 @@
             </div>
           </div>
 
-          <!-- Flip Card 4: AI Systems -->
-          <div class="flip-card reveal-item" onclick="toggleCardFlip(this)">
+          <!-- Flip Card 4: AI Systems (Enters from Left) -->
+          <div class="flip-card scroll-dynamic scroll-from-left delay-2" onclick="toggleCardFlip(this)">
             <div class="flip-card-inner">
               <!-- Front -->
               <div class="flip-card-front p-8 flex flex-col justify-between">
@@ -763,8 +793,8 @@
             </div>
           </div>
 
-          <!-- Flip Card 5: Business Automation -->
-          <div class="flip-card reveal-item" onclick="toggleCardFlip(this)">
+          <!-- Flip Card 5: Business Automation (Enters from Bottom) -->
+          <div class="flip-card scroll-dynamic scroll-from-bottom delay-3" onclick="toggleCardFlip(this)">
             <div class="flip-card-inner">
               <!-- Front -->
               <div class="flip-card-front p-8 flex flex-col justify-between">
@@ -812,8 +842,8 @@
             </div>
           </div>
 
-          <!-- Flip Card 6: Unified Conversion Systems -->
-          <div class="flip-card reveal-item" onclick="toggleCardFlip(this)">
+          <!-- Flip Card 6: Unified Conversion Systems (Enters from Right) -->
+          <div class="flip-card scroll-dynamic scroll-from-right delay-4" onclick="toggleCardFlip(this)">
             <div class="flip-card-inner">
               <!-- Front -->
               <div class="flip-card-front p-8 flex flex-col justify-between">
@@ -869,8 +899,8 @@
     <section id="systems" class="py-24 md:py-36 bg-brand-void border-t border-brand-border relative overflow-hidden">
       <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         
-        <!-- Section Header -->
-        <div class="text-center max-w-3xl mx-auto mb-20 reveal-item">
+        <!-- Section Header (Animated from Top) -->
+        <div class="text-center max-w-3xl mx-auto mb-20 scroll-dynamic scroll-from-top">
           <span class="px-3.5 py-1 rounded-full bg-brand-surface/80 border border-brand-border text-xs font-mono tracking-widest text-brand-gold uppercase backdrop-blur-md">
             COMPLETE ARCHITECTURE
           </span>
@@ -883,7 +913,7 @@
         </div>
 
         <!-- System Pipeline Flow Visualization with Glass & Interactive Node Panels -->
-        <div class="relative glass-panel rounded-2xl p-6 md:p-10 shadow-2xl reveal-item">
+        <div class="relative glass-panel rounded-2xl p-6 md:p-10 shadow-2xl scroll-dynamic scroll-from-bottom">
           
           <!-- Decorative Status Line -->
           <div class="flex flex-wrap items-center justify-between gap-4 pb-8 mb-8 border-b border-brand-border text-xs font-mono text-brand-muted">
@@ -897,11 +927,11 @@
             </div>
           </div>
 
-          <!-- Flow Grid with Enhanced System Node Cards -->
+          <!-- Flow Grid with Enhanced System Node Cards Animated Alternately -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 relative">
             
-            <!-- Step 1 -->
-            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group" onclick="toggleNodeDetails(this)">
+            <!-- Step 1 (Enters Left) -->
+            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group scroll-dynamic scroll-from-left delay-1" onclick="toggleNodeDetails(this)">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-mono text-brand-gold">01 / DISCOVERY</span>
                 <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
@@ -913,8 +943,8 @@
               </div>
             </div>
 
-            <!-- Step 2 -->
-            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group" onclick="toggleNodeDetails(this)">
+            <!-- Step 2 (Enters Top) -->
+            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group scroll-dynamic scroll-from-top delay-2" onclick="toggleNodeDetails(this)">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-mono text-brand-gold">02 / DESTINATION</span>
                 <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
@@ -926,8 +956,8 @@
               </div>
             </div>
 
-            <!-- Step 3 -->
-            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group" onclick="toggleNodeDetails(this)">
+            <!-- Step 3 (Enters Right) -->
+            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group scroll-dynamic scroll-from-right delay-3" onclick="toggleNodeDetails(this)">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-mono text-brand-gold">03 / CONVERSION</span>
                 <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
@@ -939,8 +969,8 @@
               </div>
             </div>
 
-            <!-- Step 4 -->
-            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group" onclick="toggleNodeDetails(this)">
+            <!-- Step 4 (Enters Left) -->
+            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group scroll-dynamic scroll-from-left delay-2" onclick="toggleNodeDetails(this)">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-mono text-brand-gold">04 / IDENTIFICATION</span>
                 <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
@@ -952,8 +982,8 @@
               </div>
             </div>
 
-            <!-- Step 5 -->
-            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group" onclick="toggleNodeDetails(this)">
+            <!-- Step 5 (Enters Bottom) -->
+            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group scroll-dynamic scroll-from-bottom delay-3" onclick="toggleNodeDetails(this)">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-mono text-emerald-400">05 / DIRECT CHANNEL</span>
                 <span class="text-[10px] font-mono text-brand-muted group-hover:text-emerald-400 transition-colors">Inspect &rarr;</span>
@@ -965,8 +995,8 @@
               </div>
             </div>
 
-            <!-- Step 6 -->
-            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group" onclick="toggleNodeDetails(this)">
+            <!-- Step 6 (Enters Right) -->
+            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group scroll-dynamic scroll-from-right delay-4" onclick="toggleNodeDetails(this)">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-mono text-brand-gold">06 / NURTURE</span>
                 <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
@@ -978,8 +1008,8 @@
               </div>
             </div>
 
-            <!-- Step 7 -->
-            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group" onclick="toggleNodeDetails(this)">
+            <!-- Step 7 (Enters Left) -->
+            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group scroll-dynamic scroll-from-left delay-3" onclick="toggleNodeDetails(this)">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-mono text-brand-gold">07 / PROPOSITION</span>
                 <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
@@ -991,8 +1021,8 @@
               </div>
             </div>
 
-            <!-- Step 8 -->
-            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group" onclick="toggleNodeDetails(this)">
+            <!-- Step 8 (Enters Bottom) -->
+            <div class="system-node-card p-5 rounded-xl border border-brand-border cursor-pointer group scroll-dynamic scroll-from-bottom delay-4" onclick="toggleNodeDetails(this)">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-mono text-brand-gold">08 / TRANSACTION</span>
                 <span class="text-[10px] font-mono text-brand-muted group-hover:text-brand-gold transition-colors">Inspect &rarr;</span>
@@ -1004,8 +1034,8 @@
               </div>
             </div>
 
-            <!-- Step 9 -->
-            <div class="system-node-card p-5 rounded-xl border border-brand-gold/40 bg-brand-gold/5 cursor-pointer group" onclick="toggleNodeDetails(this)">
+            <!-- Step 9 (Enters Right) -->
+            <div class="system-node-card p-5 rounded-xl border border-brand-gold/40 bg-brand-gold/5 cursor-pointer group scroll-dynamic scroll-from-right delay-5" onclick="toggleNodeDetails(this)">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-mono text-brand-gold">09 / RETENTION</span>
                 <span class="text-[10px] font-mono text-brand-gold group-hover:text-white transition-colors">Inspect &rarr;</span>
@@ -1020,7 +1050,7 @@
           </div>
 
           <!-- Bottom Visual Bar -->
-          <div class="mt-8 p-4 rounded-xl bg-brand-void/80 border border-brand-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="mt-8 p-4 rounded-xl bg-brand-void/80 border border-brand-border flex flex-col md:flex-row items-center justify-between gap-4 scroll-dynamic scroll-from-bottom delay-2">
             <div class="flex items-center gap-3">
               <i class="fa-solid fa-network-wired text-brand-gold"></i>
               <span class="text-xs text-brand-offwhite">Traditional sites stop at Node 02. BuildWithBhavyee engineers all 9 synchronized layers.</span>
@@ -1039,8 +1069,8 @@
     <section id="work" class="py-24 md:py-32 bg-brand-surface/20 border-t border-brand-border">
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 reveal-item">
+        <!-- Header (Animated from Top) -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 scroll-dynamic scroll-from-top">
           <div>
             <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">SELECTED SYSTEMS DEPLOYED</span>
             <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white">Proven System Blueprints.</h2>
@@ -1050,11 +1080,11 @@
           </p>
         </div>
 
-        <!-- Projects Grid -->
+        <!-- Projects Grid (Left and Right directional entries) -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
-          <!-- Project 1 -->
-          <article class="rounded-xl glass-panel border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col reveal-item">
+          <!-- Project 1 (From Left) -->
+          <article class="rounded-xl glass-panel border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col scroll-dynamic scroll-from-left delay-1">
             <div class="h-60 bg-gradient-to-br from-brand-surfaceLight/80 via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void/80 px-3 py-1 rounded border border-brand-border">High-Ticket Consulting</span>
@@ -1078,8 +1108,8 @@
             </div>
           </article>
 
-          <!-- Project 2 -->
-          <article class="rounded-xl glass-panel border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col reveal-item">
+          <!-- Project 2 (From Right) -->
+          <article class="rounded-xl glass-panel border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col scroll-dynamic scroll-from-right delay-2">
             <div class="h-60 bg-gradient-to-br from-brand-surfaceLight/80 via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void/80 px-3 py-1 rounded border border-brand-border">Wellness & Healthcare</span>
@@ -1103,8 +1133,8 @@
             </div>
           </article>
 
-          <!-- Project 3 -->
-          <article class="rounded-xl glass-panel border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col reveal-item">
+          <!-- Project 3 (From Left) -->
+          <article class="rounded-xl glass-panel border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col scroll-dynamic scroll-from-left delay-2">
             <div class="h-60 bg-gradient-to-br from-brand-surfaceLight/80 via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void/80 px-3 py-1 rounded border border-brand-border">Author & Keynote Speaker</span>
@@ -1128,8 +1158,8 @@
             </div>
           </article>
 
-          <!-- Project 4 -->
-          <article class="rounded-xl glass-panel border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col reveal-item">
+          <!-- Project 4 (From Right) -->
+          <article class="rounded-xl glass-panel border border-brand-border overflow-hidden hover:border-brand-gold/50 transition-all duration-300 shadow-card-depth flex flex-col scroll-dynamic scroll-from-right delay-3">
             <div class="h-60 bg-gradient-to-br from-brand-surfaceLight/80 via-brand-surface to-brand-void border-b border-brand-border p-6 flex flex-col justify-between relative group">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-mono uppercase tracking-wider text-brand-gold bg-brand-void/80 px-3 py-1 rounded border border-brand-border">B2B Professional Services</span>
@@ -1161,8 +1191,8 @@
     <section id="process" class="py-24 md:py-32 bg-brand-void border-t border-brand-border">
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         
-        <!-- Header -->
-        <div class="max-w-3xl mb-16 reveal-item">
+        <!-- Header (Animated from Top) -->
+        <div class="max-w-3xl mb-16 scroll-dynamic scroll-from-top">
           <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">METHODICAL DEPLOYMENT</span>
           <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
             How We Build Your Growth Engine.
@@ -1172,10 +1202,10 @@
           </p>
         </div>
 
-        <!-- 6 Step Timeline with Glass Panels -->
+        <!-- 6 Step Timeline with Alternating Outside->Inside Directions -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
-          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
+          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors scroll-dynamic scroll-from-left delay-1">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">01</span>
             <h3 class="text-lg font-bold text-white mb-2">Discover & Audit</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -1183,7 +1213,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
+          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors scroll-dynamic scroll-from-top delay-2">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">02</span>
             <h3 class="text-lg font-bold text-white mb-2">Architect & Strategize</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -1191,7 +1221,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
+          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors scroll-dynamic scroll-from-right delay-3">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">03</span>
             <h3 class="text-lg font-bold text-white mb-2">Design & Visual Identity</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -1199,7 +1229,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
+          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors scroll-dynamic scroll-from-left delay-2">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">04</span>
             <h3 class="text-lg font-bold text-white mb-2">Engineer & Automate</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -1207,7 +1237,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
+          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors scroll-dynamic scroll-from-bottom delay-3">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">05</span>
             <h3 class="text-lg font-bold text-white mb-2">QA & Stress-Testing</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -1215,7 +1245,7 @@
             </p>
           </div>
 
-          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors reveal-item">
+          <div class="p-6 rounded-xl glass-panel border border-brand-border hover:border-brand-gold/40 transition-colors scroll-dynamic scroll-from-right delay-4">
             <span class="text-2xl font-mono font-bold text-brand-gold/80 block mb-3">06</span>
             <h3 class="text-lg font-bold text-white mb-2">Launch & System Evolution</h3>
             <p class="text-xs text-brand-muted leading-relaxed">
@@ -1233,7 +1263,8 @@
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <div class="lg:col-span-5 reveal-item">
+          <!-- Left Text Column (Enters from Left) -->
+          <div class="lg:col-span-5 scroll-dynamic scroll-from-left">
             <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">OUR OPERATING STANDARD</span>
             <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-6">
               Built Specifically For Business Outcomes, Not Vanity.
@@ -1257,11 +1288,11 @@
             </div>
           </div>
 
-          <!-- Flip-Flop Problem -> Solution Cards -->
+          <!-- Flip-Flop Problem -> Solution Cards (Enters from Right / Bottom) -->
           <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
             
-            <!-- Problem -> Solution Flip Card 1 -->
-            <div class="flip-card reveal-item" style="min-height: 240px;" onclick="toggleCardFlip(this)">
+            <!-- Problem -> Solution Flip Card 1 (From Top) -->
+            <div class="flip-card scroll-dynamic scroll-from-top delay-1" style="min-height: 240px;" onclick="toggleCardFlip(this)">
               <div class="flip-card-inner">
                 <div class="flip-card-front p-6 rounded-xl flex flex-col justify-between">
                   <div class="card-sheen"></div>
@@ -1283,8 +1314,8 @@
               </div>
             </div>
 
-            <!-- Problem -> Solution Flip Card 2 -->
-            <div class="flip-card reveal-item" style="min-height: 240px;" onclick="toggleCardFlip(this)">
+            <!-- Problem -> Solution Flip Card 2 (From Right) -->
+            <div class="flip-card scroll-dynamic scroll-from-right delay-2" style="min-height: 240px;" onclick="toggleCardFlip(this)">
               <div class="flip-card-inner">
                 <div class="flip-card-front p-6 rounded-xl flex flex-col justify-between">
                   <div class="card-sheen"></div>
@@ -1306,8 +1337,8 @@
               </div>
             </div>
 
-            <!-- Problem -> Solution Flip Card 3 -->
-            <div class="flip-card reveal-item" style="min-height: 240px;" onclick="toggleCardFlip(this)">
+            <!-- Problem -> Solution Flip Card 3 (From Left) -->
+            <div class="flip-card scroll-dynamic scroll-from-left delay-3" style="min-height: 240px;" onclick="toggleCardFlip(this)">
               <div class="flip-card-inner">
                 <div class="flip-card-front p-6 rounded-xl flex flex-col justify-between">
                   <div class="card-sheen"></div>
@@ -1329,8 +1360,8 @@
               </div>
             </div>
 
-            <!-- Problem -> Solution Flip Card 4 -->
-            <div class="flip-card reveal-item" style="min-height: 240px;" onclick="toggleCardFlip(this)">
+            <!-- Problem -> Solution Flip Card 4 (From Bottom) -->
+            <div class="flip-card scroll-dynamic scroll-from-bottom delay-4" style="min-height: 240px;" onclick="toggleCardFlip(this)">
               <div class="flip-card-inner">
                 <div class="flip-card-front p-6 rounded-xl flex flex-col justify-between">
                   <div class="card-sheen"></div>
@@ -1361,7 +1392,7 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="py-24 md:py-32 bg-brand-void border-t border-brand-border">
       <div class="max-w-5xl mx-auto px-6 lg:px-12">
-        <div class="p-8 md:p-14 rounded-2xl glass-panel relative overflow-hidden reveal-item">
+        <div class="p-8 md:p-14 rounded-2xl glass-panel relative overflow-hidden scroll-dynamic scroll-from-bottom">
           
           <div class="relative z-10 space-y-6">
             <span class="text-xs font-mono uppercase tracking-widest text-brand-gold block">COMPANY PHILOSOPHY</span>
@@ -1389,7 +1420,7 @@
 
     <!-- FINAL CALL TO ACTION (CINEMATIC) -->
     <section class="py-24 md:py-36 bg-gradient-to-b from-brand-void via-brand-surface/60 to-brand-void border-t border-brand-border relative text-center">
-      <div class="max-w-4xl mx-auto px-6 lg:px-12 relative z-10 reveal-item">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 relative z-10 scroll-dynamic scroll-from-top">
         <span class="text-xs font-mono tracking-widest uppercase text-brand-gold px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/5 inline-block mb-6">
           IMMEDIATE PIPELINE ACCELERATION
         </span>
@@ -1418,8 +1449,8 @@
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
-          <!-- Left Info Column -->
-          <div class="lg:col-span-5 space-y-8 reveal-item">
+          <!-- Left Info Column (Enters from Left) -->
+          <div class="lg:col-span-5 space-y-8 scroll-dynamic scroll-from-left">
             <div>
               <span class="text-xs font-mono uppercase tracking-widest text-brand-gold mb-2 block">PROJECT INITIATION</span>
               <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
@@ -1487,8 +1518,8 @@
             </div>
           </div>
 
-          <!-- Contact Form Right Column -->
-          <div class="lg:col-span-7 reveal-item">
+          <!-- Contact Form Right Column (Enters from Right) -->
+          <div class="lg:col-span-7 scroll-dynamic scroll-from-right delay-2">
             <div class="p-8 md:p-10 rounded-2xl glass-panel shadow-2xl">
               
               <form id="contactForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
@@ -1745,7 +1776,7 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- JAVASCRIPT: THREE.JS 3D CANVAS, PERSISTENCE, FLIP CARDS & MICRO-INTERACTIONS -->
+  <!-- JAVASCRIPT: THREE.JS 3D CANVAS, OUTSIDE/INSIDE SCROLL ENGINE, POPUPS & MODALS -->
   <!-- ========================================================================= -->
   <script>
     // --------------------------------------------------------------------------
@@ -1838,16 +1869,14 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
       }, { passive: true });
 
-      // Smooth Persistence Handling on Scroll:
-      // The 3D scene stays persistent in the background without being torn down or abruptly disappearing;
-      // It smoothly fades slightly as the user dives into the lower operational content.
+      // Smooth Persistence Handling on Scroll
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         const heroHeight = document.getElementById('hero')?.offsetHeight || 800;
         
         if (wrap) {
           if (scrollY > heroHeight * 1.5) {
-            wrap.style.opacity = '0.12'; // Keep a subtle persistent ambient mesh in deep sections
+            wrap.style.opacity = '0.12';
           } else {
             const fade = Math.max(0.3, 1 - (scrollY / (heroHeight * 1.2)));
             wrap.style.opacity = fade.toString();
@@ -1859,7 +1888,6 @@
       function animate3D() {
         requestAnimationFrame(animate3D);
 
-        // Smooth camera dampening
         targetX += (mouseX - targetX) * 0.05;
         targetY += (mouseY - targetY) * 0.05;
         camera.position.x = targetX * 45;
@@ -1869,7 +1897,6 @@
         centralOrb.rotation.x += 0.0015;
         centralOrb.rotation.y += 0.0025;
 
-        // Animate particles & dynamic line interconnects
         const pos = particleSystem.geometry.attributes.position.array;
         const linePositions = [];
 
@@ -1879,12 +1906,10 @@
           pos[idx + 1] += velocities[i].y;
           pos[idx + 2] += velocities[i].z;
 
-          // Boundary Bounce
           if (Math.abs(pos[idx]) > 75) velocities[i].x *= -1;
           if (Math.abs(pos[idx + 1]) > 50) velocities[i].y *= -1;
           if (Math.abs(pos[idx + 2]) > 40) velocities[i].z *= -1;
 
-          // Connect nearby nodes
           for (let j = i + 1; j < nodeCount; j++) {
             const jdx = j * 3;
             const dx = pos[idx] - pos[jdx];
@@ -1924,7 +1949,6 @@
       }, { passive: true });
     }
 
-    // Interactive node highlight feedback
     function pulseNode(el) {
       el.classList.add('border-brand-gold', 'scale-[1.02]');
       setTimeout(() => {
@@ -1932,12 +1956,10 @@
       }, 300);
     }
 
-    // Toggle Flip-Flop Card State (Click-to-lock or Mobile Tap)
     function toggleCardFlip(card) {
       card.classList.toggle('is-flipped');
     }
 
-    // Toggle node inspection in Systems section with active visual state
     function toggleNodeDetails(card) {
       const detail = card.querySelector('.node-expanded-info');
       if (detail) {
@@ -1947,7 +1969,61 @@
     }
 
     // --------------------------------------------------------------------------
-    // 3. INQUIRY MODAL POPUP LOGIC
+    // 3. BIDIRECTIONAL SCROLL-BASED OUTSIDE ↔ INSIDE ANIMATION ENGINE
+    // Automatically triggers:
+    // Scroll DOWN -> Elements animate from OUTSIDE to INSIDE (designated location)
+    // Scroll UP -> Elements retreat from INSIDE to OUTSIDE
+    // --------------------------------------------------------------------------
+    (function initDynamicScrollEngine() {
+      const elements = document.querySelectorAll('.scroll-dynamic');
+      if (!elements.length) return;
+
+      let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
+      let scrollDirection = 'down';
+
+      // Check on each frame/tick for ultra-smooth responsiveness
+      function checkScrollPositions() {
+        const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+        scrollDirection = currentScrollY >= lastScrollY ? 'down' : 'up';
+        lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        elements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          
+          // Triggers entrance when top enters bottom 88% of screen
+          // Triggers exit when element moves out of view either way
+          const inViewZone = (rect.top <= viewportHeight * 0.88) && (rect.bottom >= viewportHeight * 0.08);
+
+          if (scrollDirection === 'down') {
+            if (inViewZone) {
+              el.classList.add('is-inside');
+            } else if (rect.top > viewportHeight) {
+              // Element is below viewport while scrolling down
+              el.classList.remove('is-inside');
+            }
+          } else {
+            // SCROLLING UP: Reverse back to OUTSIDE when scrolled past
+            if (rect.top > viewportHeight * 0.86) {
+              el.classList.remove('is-inside');
+            } else if (inViewZone) {
+              el.classList.add('is-inside');
+            }
+          }
+        });
+      }
+
+      // Initial pass to render hero & visible top elements
+      window.addEventListener('DOMContentLoaded', checkScrollPositions);
+      window.addEventListener('load', checkScrollPositions);
+      window.addEventListener('scroll', checkScrollPositions, { passive: true });
+      window.addEventListener('resize', checkScrollPositions, { passive: true });
+      setTimeout(checkScrollPositions, 100);
+    })();
+
+    // --------------------------------------------------------------------------
+    // 4. INQUIRY MODAL POPUP LOGIC
     // --------------------------------------------------------------------------
     const inquiryModal = document.getElementById('inquiryModal');
     const modalContent = document.getElementById('inquiryModalContent');
@@ -1972,12 +2048,10 @@
       }, 200);
     }
 
-    // Close on outside click
     inquiryModal.addEventListener('click', (e) => {
       if (e.target === inquiryModal) closeInquiryModal();
     });
 
-    // Handle Modal Form Submission
     function handleModalSubmit(e) {
       e.preventDefault();
       const submitBtn = document.getElementById('mSubmitBtn');
@@ -2001,7 +2075,7 @@
     }
 
     // --------------------------------------------------------------------------
-    // 4. EXIT-INTENT / ENGAGEMENT POPUP LOGIC
+    // 5. EXIT-INTENT / ENGAGEMENT POPUP LOGIC
     // --------------------------------------------------------------------------
     const exitPopup = document.getElementById('exitIntentPopup');
     let popupShown = false;
@@ -2018,14 +2092,13 @@
       exitPopup.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
     }
 
-    // Trigger exit popup on cursor leaving towards top (Desktop) or after 25 seconds
     document.addEventListener('mouseleave', (e) => {
       if (e.clientY <= 0) showExitPopup();
     });
     setTimeout(showExitPopup, 26000);
 
     // --------------------------------------------------------------------------
-    // 5. LIVE NOTIFICATION TOAST POPUP (Tasteful periodic proof)
+    // 6. LIVE NOTIFICATION TOAST POPUP
     // --------------------------------------------------------------------------
     const liveToast = document.getElementById('liveToast');
     setTimeout(() => {
@@ -2034,20 +2107,6 @@
         liveToast.classList.add('animate-toast');
       }
     }, 4500);
-
-    // --------------------------------------------------------------------------
-    // 6. SCROLL REVEAL OBSERVER (Smooth Motion)
-    // --------------------------------------------------------------------------
-    const revealItems = document.querySelectorAll('.reveal-item');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        }
-      });
-    }, { threshold: 0.12 });
-
-    revealItems.forEach(el => revealObserver.observe(el));
 
     // --------------------------------------------------------------------------
     // 7. CONTACT SECTION FORM HANDLER
